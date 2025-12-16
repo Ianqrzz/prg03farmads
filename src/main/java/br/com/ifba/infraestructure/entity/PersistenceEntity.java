@@ -7,13 +7,17 @@ package br.com.ifba.infraestructure.entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author ianep
  */
-@Data
+@MappedSuperclass
+@Getter
+@Setter
 public class PersistenceEntity {
     
     @Id

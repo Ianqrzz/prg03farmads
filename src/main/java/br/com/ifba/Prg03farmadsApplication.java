@@ -1,6 +1,6 @@
 package br.com.ifba;
 
-import br.com.ifba.produto.view.ProdutoListar; // Importamos a sua tela
+import br.com.ifba.view.TelaInicial;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -16,7 +16,7 @@ public class Prg03farmadsApplication {
                         .run(args);
 
         // temporario para testar o CRUD PRODUTOS, remover no projeto final
-        ProdutoListar telaPrincipal = context.getBean(ProdutoListar.class);
+        TelaInicial telaPrincipal = context.getBean(TelaInicial.class);
 
         telaPrincipal.setVisible(true);
     }

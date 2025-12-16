@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 
 import br.com.ifba.infraestructure.entity.PersistenceEntity;
 import br.com.ifba.cliente.entity.Cliente;
+import jakarta.persistence.JoinColumn;
 import java.util.Date;
 
 
@@ -29,7 +30,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 public class Receita extends PersistenceEntity implements Serializable{
     
-    @Column (name = "cliente", nullable = false)
+    @jakarta.persistence.ManyToOne 
+    @JoinColumn (name = "cliente", nullable = false)
     private Cliente cliente;
     
     @Column (name = "nome_medico", nullable = false)

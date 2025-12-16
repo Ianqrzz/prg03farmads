@@ -20,12 +20,15 @@ public class ProdutoAdicionar extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         lblcriarProduto = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblValor = new javax.swing.JLabel();
         txtValor = new javax.swing.JTextField();
         btnCriar = new javax.swing.JButton();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -117,6 +120,7 @@ public class ProdutoAdicionar extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCriar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblValor;
     private javax.swing.JLabel lblcriarProduto;

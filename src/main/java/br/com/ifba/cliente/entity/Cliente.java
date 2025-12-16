@@ -4,10 +4,21 @@
  */
 package br.com.ifba.cliente.entity;
 
+import br.com.ifba.infraestructure.entity.PersistenceEntity;
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author paulo, Criei a classe em branco somente para implementar em receitas
  */
-public class Cliente {
+@Entity
+@Getter
+@Setter
+public class Cliente extends PersistenceEntity{
     
-}
+    public Cliente(){
+    }
+  }
+

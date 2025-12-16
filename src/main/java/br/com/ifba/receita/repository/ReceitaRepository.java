@@ -4,10 +4,13 @@
  */
 package br.com.ifba.receita.repository;
 
+import org.springframework.stereotype.Repository;
+
 /**
  *
  * @author paulo
  */
+@Repository
 public class ReceitaRepository implements ReceitaIRepository {
     
 }

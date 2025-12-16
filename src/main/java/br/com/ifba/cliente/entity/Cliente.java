@@ -2,15 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.ifba.receita.controller;
-
-import org.springframework.stereotype.Controller;
+package br.com.ifba.cliente.entity;
 
 /**
  *
- * @author paulo
+ * @author paulo, Criei a classe em branco somente para implementar em receitas
  */
-@Controller
-public class ReceitaController implements ReceitaIController{
+public class Cliente {
     
 }

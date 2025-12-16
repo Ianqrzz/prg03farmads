@@ -4,10 +4,13 @@
  */
 package br.com.ifba.receita.view;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author paulo
  */
+@Component
 public class ReceitaVisualizar extends javax.swing.JFrame {
 
     /**

@@ -4,10 +4,13 @@
  */
 package br.com.ifba.receita.service;
 
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author paulo
  */
+@Service
 public class ReceitaService implements ReceitaIService {
     
 }

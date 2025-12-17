@@ -23,4 +23,8 @@ public interface IFuncionariosController {
     Funcionarios update(Long id, Funcionarios funcionarios);
 
     void delete(Long id);
+
+    public List<Funcionarios> listAll();
+
+    public void deleteById(Long id);
 }

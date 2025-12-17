@@ -4,21 +4,63 @@
  */
 package br.com.ifba.funcionarios.view;
 
+
+import br.com.ifba.funcionarios.controller.FuncionariosController;
+import br.com.ifba.funcionarios.view.*;
+import br.com.ifba.funcionarios.controller.IFuncionariosController;
+import br.com.ifba.funcionarios.entity.Funcionarios;
+import jakarta.annotation.PostConstruct;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /**
  *
- * @author Arkins
+ * @author PC
  */
+@Component
 public class FuncionariosListar extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FuncionariosListar.class.getName());
 
     /**
-     * Creates new form FuncionariosListar
+     * Creates new form ClienteListar
      */
+    @Autowired
+    private IFuncionariosController funcionariosController;
+    private List<Funcionarios> listaFuncionarios;
+    
     public FuncionariosListar() {
         initComponents();
     }
+    @PostConstruct
+    public void init() {
+        
+        preencherTabela();
+    }
 
+    private void preencherTabela() {
+
+        DefaultTableModel model = (DefaultTableModel) tblFuncionarios.getModel();
+    model.setRowCount(0);
+
+    listaFuncionarios = funcionariosController.listAll();
+
+    if (listaFuncionarios != null) {
+        for (Funcionarios funcionarios : listaFuncionarios) {
+            model.addRow(new Object[]{
+                funcionarios.getNome(),
+                funcionarios.getCargo(),
+                funcionarios.getTotalVendas(),
+                
+            });
+        }
+    }
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,47 +70,243 @@ public class FuncionariosListar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        sclClientesLista = new javax.swing.JScrollPane();
+        tblFuncionarios = new javax.swing.JTable();
+        txtPesquisa = new javax.swing.JTextField();
+        btnAdicionar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnResetar = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tblFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "nome", "CPF", "Email", "Telefone", "Endereço"
+            }
+        ));
+        sclClientesLista.setViewportView(tblFuncionarios);
+
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisaActionPerformed(evt);
+            }
+        });
+
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnResetar.setText("R");
+        btnResetar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetarActionPerformed(evt);
+            }
+        });
+
+        btnPesquisar.setText("Pesqusar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nome:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sclClientesLista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnPesquisar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdicionar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnResetar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnResetar)
+                        .addComponent(btnExcluir)
+                        .addComponent(btnEditar)
+                        .addComponent(btnAdicionar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPesquisar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sclClientesLista, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisaActionPerformed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        FuncionariosAdicionar telaAdd = new FuncionariosAdicionar(this, true, (FuncionariosController) this.funcionariosController);
+        
+        telaAdd.setVisible(true);
+        
+        preencherTabela();
+        
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        
+    int linhaSelecionada = tblFuncionarios.getSelectedRow();
+
+    if (linhaSelecionada == -1) {
+        JOptionPane.showMessageDialog(
+            this,
+            "Selecione um cliente para excluir!",
+            "Atenção",
+            JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    Funcionarios funcionariosSelecionado = listaFuncionarios.get(linhaSelecionada);
+    Long id = funcionariosSelecionado.getId();
+
+    int confirmacao = JOptionPane.showConfirmDialog(
+        this,
+        "Deseja realmente excluir o cliente:\n" + funcionariosSelecionado.getNome() + "?",
+        "Confirmar Exclusão",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirmacao == JOptionPane.YES_OPTION) {
+        funcionariosController.deleteById(id);
+        preencherTabela();
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Cliente excluído com sucesso!",
+            "Sucesso",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int linhaSelecionada = tblFuncionarios.getSelectedRow();
+
+    if (linhaSelecionada == -1) {
+        JOptionPane.showMessageDialog(
+            this,
+            "Selecione um cliente para editar!",
+            "Atenção",
+            JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    Funcionarios funcionariosSelecionado = listaFuncionarios.get(linhaSelecionada);
+
+    FuncionariosEditar telaEditar =
+        new FuncionariosEditar(funcionariosSelecionado, funcionariosController);
+
+    telaEditar.setVisible(true);
+
+    preencherTabela(); // refresh após edição
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnResetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetarActionPerformed
+        // TODO add your handling code here:
+        preencherTabela();
+    }//GEN-LAST:event_btnResetarActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        // TODO add your handling code here:
+        String nomePesquisado = txtPesquisa.getText().trim().toLowerCase();
+
+    DefaultTableModel model = (DefaultTableModel) tblFuncionarios.getModel();
+    model.setRowCount(0); // limpa a tabela
+
+    if (nomePesquisado.isEmpty()) {
+        preencherTabela();
+        return;
+    }
+
+    for (Funcionarios funcionarios : listaFuncionarios) {
+        if (funcionarios.getNome().toLowerCase().contains(nomePesquisado)) {
+            model.addRow(new Object[]{
+                funcionarios.getNome(),
+                funcionarios.getCargo(),
+                funcionarios.getTotalVendas()
+
+            });
+        }
+    }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FuncionariosListar().setVisible(true));
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnResetar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane sclClientesLista;
+    private javax.swing.JTable tblFuncionarios;
+    private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 }

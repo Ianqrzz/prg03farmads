@@ -46,7 +46,7 @@ public class FuncionariosService implements IFuncionariosService {
 
         funcionariosup.setNome(funcionarios.getNome());
         funcionariosup.setCargo(funcionarios.getCargo());
-        funcionariosup.setTotalVendas(funcionarios.getTotalVendas);
+        funcionariosup.setTotalVendas(funcionarios.getTotalVendas());
  
         return funcionariosRepository.save(funcionarios);
     }

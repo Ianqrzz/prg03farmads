@@ -21,17 +21,18 @@ public class Funcionarios {
     private String nome;
     private String login;
     private String senha;
-    private int totalVendas;
+    private int totalVendas = 0;
     private String cargo;
-    public int getTotalVendas;
+    
 
-    public Funcionarios(Long id, String nome, String login, String senha, int totalVendas, String cargo) {
+    public Funcionarios(Long id, String nome, int totalVendas, String cargo) {
         this.id = id;
         this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        this.totalVendas = totalVendas;
         this.cargo = cargo;
+    }
+
+    public Funcionarios() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     
@@ -72,7 +73,7 @@ public class Funcionarios {
     }
 
     public void setTotalVendas(int totalVendas) {
-        this.totalVendas = totalVendas;
+        this.totalVendas = +1;
     }
 
     public String getCargo() {

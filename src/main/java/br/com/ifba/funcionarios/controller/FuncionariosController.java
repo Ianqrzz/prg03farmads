@@ -43,4 +43,14 @@ public class FuncionariosController implements IFuncionariosController {
     public void delete(Long id) {
         funcionariosService.delete(id);
     }
+
+    @Override
+    public List<Funcionarios> listAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

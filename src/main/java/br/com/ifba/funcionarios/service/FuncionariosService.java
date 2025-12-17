@@ -6,6 +6,7 @@ package br.com.ifba.funcionarios.service;
 
 import br.com.ifba.funcionarios.entity.Funcionarios;
 import br.com.ifba.funcionarios.repository.FuncionariosRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -59,6 +60,12 @@ public class FuncionariosService implements IFuncionariosService {
         }
         funcionariosRepository.deleteById(id);
     }
+    
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        funcionariosRepository.deleteById(id);
+}
 
    
   

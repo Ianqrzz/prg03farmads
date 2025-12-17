@@ -25,9 +25,7 @@ public class FuncionariosListar extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FuncionariosListar.class.getName());
 
-    /**
-     * Creates new form ClienteListar
-     */
+ 
     @Autowired
     private IFuncionariosController funcionariosController;
     private List<Funcionarios> listaFuncionarios;
@@ -38,25 +36,40 @@ public class FuncionariosListar extends javax.swing.JFrame {
     @PostConstruct
     public void init() {
         
-        preencherTabela();
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                preencherTabela();
+            } catch (Exception e) {
+                logger.log(java.util.logging.Level.SEVERE, "Erro ao carregar dados", e);
+            }
+        });
     }
 
     private void preencherTabela() {
 
-        DefaultTableModel model = (DefaultTableModel) tblFuncionarios.getModel();
+      DefaultTableModel model = (DefaultTableModel) tblFuncionarios.getModel();
     model.setRowCount(0);
 
-    listaFuncionarios = funcionariosController.listAll();
+    // 1. Tenta buscar os dados
+    try {
+        this.listaFuncionarios = funcionariosController.listAll();
+    } catch (Exception e) {
+        logger.log(java.util.logging.Level.SEVERE, "Erro ao buscar dados do controller", e);
+        this.listaFuncionarios = new java.util.ArrayList<>(); // Garante que não é null
+    }
 
-    if (listaFuncionarios != null) {
-        for (Funcionarios funcionarios : listaFuncionarios) {
-            model.addRow(new Object[]{
-                funcionarios.getNome(),
-                funcionarios.getCargo(),
-                funcionarios.getTotalVendas(),
-                
-            });
-        }
+    // 2. Proteção extra: se o controller retornou null sem lançar exception
+    if (this.listaFuncionarios == null) {
+        this.listaFuncionarios = new java.util.ArrayList<>();
+    }
+
+    // 3. Agora o loop é seguro
+    for (Funcionarios f : this.listaFuncionarios) {
+        model.addRow(new Object[]{
+            f.getNome(),
+            f.getCargo(),
+            f.getTotalVendas()
+        });
     }
     }
 
@@ -84,15 +97,23 @@ public class FuncionariosListar extends javax.swing.JFrame {
 
         tblFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "nome", "CPF", "Email", "Telefone", "Endereço"
+                "Nome", "Cargo", "Num Vendas"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         sclClientesLista.setViewportView(tblFuncionarios);
 
         txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +229,7 @@ public class FuncionariosListar extends javax.swing.JFrame {
     if (linhaSelecionada == -1) {
         JOptionPane.showMessageDialog(
             this,
-            "Selecione um cliente para excluir!",
+            "Selecione um funcionario para excluir!",
             "Atenção",
             JOptionPane.WARNING_MESSAGE
         );
@@ -220,7 +241,7 @@ public class FuncionariosListar extends javax.swing.JFrame {
 
     int confirmacao = JOptionPane.showConfirmDialog(
         this,
-        "Deseja realmente excluir o cliente:\n" + funcionariosSelecionado.getNome() + "?",
+        "Deseja realmente excluir o funcionario:\n" + funcionariosSelecionado.getNome() + "?",
         "Confirmar Exclusão",
         JOptionPane.YES_NO_OPTION
     );
@@ -231,7 +252,7 @@ public class FuncionariosListar extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(
             this,
-            "Cliente excluído com sucesso!",
+            "funcionario excluído com sucesso!",
             "Sucesso",
             JOptionPane.INFORMATION_MESSAGE
         );
@@ -240,27 +261,28 @@ public class FuncionariosListar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
         int linhaSelecionada = tblFuncionarios.getSelectedRow();
 
     if (linhaSelecionada == -1) {
-        JOptionPane.showMessageDialog(
-            this,
-            "Selecione um cliente para editar!",
-            "Atenção",
-            JOptionPane.WARNING_MESSAGE
-        );
+        JOptionPane.showMessageDialog(this, "Selecione um funcionário!");
         return;
     }
 
-    Funcionarios funcionariosSelecionado = listaFuncionarios.get(linhaSelecionada);
+    // 1. Pega o funcionário da lista
+    Funcionarios selecionado = listaFuncionarios.get(linhaSelecionada);
 
-    FuncionariosEditar telaEditar =
-        new FuncionariosEditar(funcionariosSelecionado, funcionariosController);
+    // 2. Cria a tela (Verifique se a ordem bate com o construtor acima: Objeto, depois Controller)
+    FuncionariosEditar telaEditar = new FuncionariosEditar(selecionado, funcionariosController);
+
+    // 3. Adiciona o ouvinte para atualizar a tabela ao fechar
+    telaEditar.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent e) {
+            preencherTabela(); // O refresh acontece aqui
+        }
+    });
 
     telaEditar.setVisible(true);
-
-    preencherTabela(); // refresh após edição
         
     }//GEN-LAST:event_btnEditarActionPerformed
 

@@ -13,17 +13,20 @@ import javax.swing.JOptionPane;
  *
  * @author PC
  */
-public class FuncionariosEditar extends javax.swing.JFrame {
+public class FuncionariosEditar extends javax.swing.JDialog { 
 
     private Funcionarios funcionarios;
     private IFuncionariosController controller;
 
+
     public FuncionariosEditar(Funcionarios funcionarios, IFuncionariosController controller) {
-        this.funcionarios = funcionarios;
-        this.controller = controller;
-        initComponents();
-        preencherCampos();
-    }
+    this.funcionarios = funcionarios;
+    this.controller = controller;
+    initComponents();
+    preencherCampos();
+   
+    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE); 
+}
 
     private void preencherCampos() {
         txtNome.setText(funcionarios.getNome());
@@ -48,7 +51,7 @@ public class FuncionariosEditar extends javax.swing.JFrame {
         txtVenda = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblNome.setText("Nome");
 

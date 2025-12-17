@@ -21,4 +21,7 @@ public interface IFuncionariosService {
     Funcionarios update(Long id, Funcionarios funcionarios);
 
     void delete(Long id);
+    
+    public void deleteById(Long id);
+
 }

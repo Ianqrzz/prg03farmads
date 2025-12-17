@@ -7,7 +7,7 @@ package br.com.ifba.view;
 import br.com.ifba.cliente.view.ClienteListar;
 import br.com.ifba.funcionarios.view.FuncionariosListar;
 import br.com.ifba.produto.view.ProdutoListar;
-import br.com.ifba.user.view.UsuarioRegistrar;
+import br.com.ifba.usuario.view.UsuarioRegistrar;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,18 +17,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class TelaInicial extends javax.swing.JFrame {
     
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaInicial.class.getName());
 
     private final UsuarioRegistrar usuarioRegistrarTela;
+    
+    private final FuncionariosListar funcionariosListar;
     
     /**
      * Creates new form TelaInicial
      * @param usuarioRegistrarTela
      */
-    public TelaInicial(UsuarioRegistrar usuarioRegistrarTela ) {
+    public TelaInicial(UsuarioRegistrar usuarioRegistrarTela, FuncionariosListar funcionariosListar) {
         this.usuarioRegistrarTela = usuarioRegistrarTela;
+        this.funcionariosListar = funcionariosListar;
         initComponents();
     }
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +50,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         btnClientes = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnFuncionarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,10 +79,10 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Funcionarios");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnFuncionarios.setText("Funcionarios");
+        btnFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnFuncionariosActionPerformed(evt);
             }
         });
 
@@ -96,7 +102,7 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnClientes)
-                            .addComponent(jButton1))))
+                            .addComponent(btnFuncionarios))))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,7 +119,7 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jToggleButton3))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnFuncionarios)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClientes)))
                 .addContainerGap(165, Short.MAX_VALUE))
@@ -136,11 +142,10 @@ public class TelaInicial extends javax.swing.JFrame {
         telaCliente.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        FuncionariosListar telaFuncionarios = new FuncionariosListar();
-        telaFuncionarios.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionariosActionPerformed
+        
+        this.funcionariosListar.setVisible(true);
+    }//GEN-LAST:event_btnFuncionariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,7 +173,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClientes;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnFuncionarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;

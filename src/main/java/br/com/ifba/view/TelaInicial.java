@@ -24,13 +24,19 @@ public class TelaInicial extends javax.swing.JFrame {
     
     private final FuncionariosListar funcionariosListar;
     
+    private final ProdutoListar produtoListar;
+    
+    private final ClienteListar clienteListar;
+    
     /**
      * Creates new form TelaInicial
      * @param usuarioRegistrarTela
      */
-    public TelaInicial(UsuarioRegistrar usuarioRegistrarTela, FuncionariosListar funcionariosListar) {
+    public TelaInicial(UsuarioRegistrar usuarioRegistrarTela, FuncionariosListar funcionariosListar, ProdutoListar produtoListar, ClienteListar clienteListar) {
         this.usuarioRegistrarTela = usuarioRegistrarTela;
         this.funcionariosListar = funcionariosListar;
+        this.produtoListar = produtoListar;
+        this.clienteListar = clienteListar;
         initComponents();
     }
     
@@ -129,8 +135,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        ProdutoListar telaListar = new ProdutoListar();
-        telaListar.setVisible(true);
+        this.produtoListar.setVisible(true);
             }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
@@ -138,8 +143,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        ClienteListar telaCliente = new ClienteListar();
-        telaCliente.setVisible(true);
+        this.clienteListar.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionariosActionPerformed

@@ -54,7 +54,7 @@ public class ClienteEditar extends javax.swing.JFrame {
         txtEndereco = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblNome.setText("Nome");
 

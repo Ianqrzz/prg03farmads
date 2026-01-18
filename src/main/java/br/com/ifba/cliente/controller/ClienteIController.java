@@ -15,7 +15,7 @@ public interface ClienteIController {
     
     public abstract Cliente save(Cliente entity);
     
-    public abstract Cliente update(Long id, Cliente entity);
+    //update obsoleto
     
     public abstract void delete(Cliente entity);
     

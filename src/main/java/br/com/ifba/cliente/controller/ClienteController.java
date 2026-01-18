@@ -24,10 +24,8 @@ public class ClienteController implements ClienteIController {
         return clienteService.save(entity);
     }
 
-    @Override
-    public Cliente update(Long id, Cliente entity) {
-        return clienteService.update(id, entity);
-    }
+    
+    
 
     @Override
     public void delete(Cliente entity) {

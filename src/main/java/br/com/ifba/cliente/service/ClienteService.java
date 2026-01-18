@@ -33,20 +33,7 @@ public class ClienteService implements ClienteIService {
         return repository.save(entity);
     }
 
-    @Override
-    public Cliente update(Long id, Cliente entity) {
-        log.info("Atualizando cliente" + entity.getNome());
-        
-        Cliente antigo = findById(id);
-        
-        antigo.setCpf(entity.getCpf());
-        antigo.setEmail(entity.getEmail());
-        antigo.setEndereco(entity.getEndereco());
-        antigo.setNome(entity.getNome());
-        antigo.setTelefone(entity.getTelefone());
-        
-        return repository.save(antigo);
-    }
+    //metodo Update se tornou obsoleto
 
     @Override
     public void delete(Cliente entity) {

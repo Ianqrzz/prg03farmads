@@ -78,7 +78,7 @@ public class ClienteListar extends javax.swing.JFrame {
         btnPesquisar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

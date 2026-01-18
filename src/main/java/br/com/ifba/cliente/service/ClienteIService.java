@@ -15,8 +15,6 @@ public interface ClienteIService {
     
     public abstract Cliente save(Cliente entity);
     
-    public abstract Cliente update(Long id, Cliente entity);
-    
     public abstract void delete(Cliente entity);
     
     public abstract List<Cliente> listAll();

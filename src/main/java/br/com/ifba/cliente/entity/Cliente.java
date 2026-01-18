@@ -4,22 +4,22 @@
  */
 package br.com.ifba.cliente.entity;
 
+import br.com.ifba.infraestructure.entity.PersistenceEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
  * @author PC
  */
 
+@Getter
+@Setter
+@ToString
 @Entity
-public class Cliente {
-    
-    @Id
-     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+public class Cliente extends PersistenceEntity{
     
     String nome;
     String cpf;
@@ -30,56 +30,5 @@ public class Cliente {
     //Construtor da classe
     public Cliente() {
     }
-    
-    //Metodos Getters e Setters
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-
     
 }

@@ -7,6 +7,7 @@ package br.com.ifba.view;
 import br.com.ifba.cliente.view.ClienteListar;
 import br.com.ifba.funcionarios.view.FuncionariosListar;
 import br.com.ifba.produto.view.ProdutoListar;
+import br.com.ifba.usuario.view.UsuarioLogin;
 import br.com.ifba.usuario.view.UsuarioRegistrar;
 import org.springframework.stereotype.Component;
 
@@ -28,15 +29,17 @@ public class TelaInicial extends javax.swing.JFrame {
     
     private final ClienteListar clienteListar;
     
+    private final UsuarioLogin usuarioLogin;
     /**
      * Creates new form TelaInicial
      * @param usuarioRegistrarTela
      */
-    public TelaInicial(UsuarioRegistrar usuarioRegistrarTela, FuncionariosListar funcionariosListar, ProdutoListar produtoListar, ClienteListar clienteListar) {
+    public TelaInicial(UsuarioRegistrar usuarioRegistrarTela,UsuarioLogin usuarioLogin, FuncionariosListar funcionariosListar, ProdutoListar produtoListar, ClienteListar clienteListar) {
         this.usuarioRegistrarTela = usuarioRegistrarTela;
         this.funcionariosListar = funcionariosListar;
         this.produtoListar = produtoListar;
         this.clienteListar = clienteListar;
+        this.usuarioLogin = usuarioLogin;
         initComponents();
     }
     
@@ -77,6 +80,11 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         jToggleButton3.setText("Login");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
 
         btnClientes.setText("Clientes");
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +158,10 @@ public class TelaInicial extends javax.swing.JFrame {
         
         this.funcionariosListar.setVisible(true);
     }//GEN-LAST:event_btnFuncionariosActionPerformed
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        this.usuarioLogin.setVisible(true);
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -22,4 +22,6 @@ public interface IUsuarioController {
     Usuario update(Usuario user);
     
     void delete(Usuario user);
+    
+    boolean login(Usuario user);
 }

@@ -22,29 +22,32 @@ public class UsuarioController implements IUsuarioController{
 
     @Override
     public Usuario save(Usuario user) {
-        return usuarioService.saveUser(user);
+        return usuarioService.save(user);
     }
 
     @Override
     public Usuario findById(Long id) {
-        return usuarioService.getUsuarioByID(id);
+        return usuarioService.getByID(id);
 
     }
 
     @Override
     public List<Usuario> FindAll() {
-        return usuarioService.findAllUsers();
+        return usuarioService.findAll();
     }
 
     @Override
     public Usuario update(Usuario user) {
-        return usuarioService.updateUsuario(user);
+        return usuarioService.update(user);
     }
 
     @Override
     public void delete(Usuario user) {
-        usuarioService.deleteUser(user);
+        usuarioService.delete(user);
     }
     
-    
+    @Override
+    public boolean login(Usuario user){
+        return usuarioService.login(user);
+    }
 }

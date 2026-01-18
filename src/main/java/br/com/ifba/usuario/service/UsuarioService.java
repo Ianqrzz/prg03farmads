@@ -28,7 +28,7 @@ public class UsuarioService implements IUsuarioService{
      private static final Logger log = LoggerFactory.
             getLogger(UsuarioService.class);
     @Override
-    public Usuario saveUser(Usuario user) {
+    public Usuario save(Usuario user) {
         
         if (StringUtil.isNullOrEmpty(user.getLogin())){
             
@@ -46,17 +46,17 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public Usuario getUsuarioByID(Long id) {
+    public Usuario getByID(Long id) {
         return usuarioRepository.findById(id).orElse(null);
    }
 
     @Override
-    public List<Usuario> findAllUsers() {
+    public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
 
     @Override
-    public Usuario updateUsuario(Usuario user) {
+    public Usuario update(Usuario user) {
         if(user == null){
             throw new RuntimeException("Dados do " + "usuario não preenchidos.");
         }else{
@@ -66,17 +66,37 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public void deleteUser(Usuario user) {
+    public void delete(Usuario user) {
         if(user == null){
             throw new RuntimeException("Dados do " + "Usuario não preenchidos.");
         }else if(user.getId() == null){
             throw new RuntimeException("Usuario não existente no banco de dados");
         }else{
-            log.info("Excluindo o Objeto Curso");
+            log.info("Excluindo o Usuario");
             usuarioRepository.delete(user);
         }      
     }
 
+    @Override
+    public boolean login(Usuario user){
+        
+        //metodo que efetua o login do usuario no programa
+        Usuario login = usuarioRepository.findByLogin(user.getLogin());
+        //checa se o usuario é existente na base de dados
+        if(login == null){
+            throw new RuntimeException("Usuario não existente");
+        }
+        //se o usuario for existente na base de dados, verifica se a senha enviada é a mesma da registrada na base de dados
+        if (!user.getSenha().equals(login.getSenha())) {
+            throw new RuntimeException("Senha incorreta");
+        } else {
+            log.info("Login do usuario efeutado");
+            return true;
+        }
+        
+        
+        
+    }
     
     
 }

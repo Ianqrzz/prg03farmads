@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 @Service
 public class ProdutoService implements IProdutoService {
 
-    // Logger manual (substituindo @Slf4j)
     private static final Logger log = Logger.getLogger(ProdutoService.class.getName());
 
     @Autowired
@@ -39,11 +38,17 @@ public class ProdutoService implements IProdutoService {
     public Produto updateProduct(Long id, Produto produtoDetails) {
         log.info("SERVICE: Atualizando produto ID: " + id);
 
+        // 1. Busca
         Produto existingProduto = getProductById(id);
 
+        // 2. Atualiza
         existingProduto.setNome(produtoDetails.getNome());
         existingProduto.setPreco(produtoDetails.getPreco());
+        existingProduto.setQtdEstoque(produtoDetails.getQtdEstoque());
+        existingProduto.setCusto(produtoDetails.getCusto());
+        existingProduto.setEstoqueMin(produtoDetails.getEstoqueMin());
 
+        // 3. Salva
         return produtoRepository.save(existingProduto);
     }
 

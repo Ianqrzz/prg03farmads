@@ -30,12 +30,18 @@
                   <Component id="lblNome" max="32767" attributes="0"/>
                   <Component id="lblValor" max="32767" attributes="0"/>
                   <Component id="txtNome" max="32767" attributes="0"/>
-                  <Component id="txtValor" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtQtdEstoque" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblNome1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblNome2" alignment="1" max="32767" attributes="0"/>
+                  <Component id="txtEstoqueMin" alignment="1" max="32767" attributes="0"/>
+                  <Component id="lblNome3" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtCusto1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtValor1" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
               <Component id="btnCriar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -53,10 +59,22 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblValor" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtValor" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="txtValor1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblNome1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtQtdEstoque" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblNome2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtCusto1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblNome3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtEstoqueMin" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnCriar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,7 +100,7 @@
         <Property name="text" type="java.lang.String" value="Insira o valor do produto"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtValor">
+    <Component class="javax.swing.JTextField" name="txtQtdEstoque">
     </Component>
     <Component class="javax.swing.JButton" name="btnCriar">
       <Properties>
@@ -90,6 +108,30 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCriarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNome1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insira a quantidade em estoque"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtValor1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNome2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insira o custo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEstoqueMin">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNome3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insira o estoque minimo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtCusto1">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCusto1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

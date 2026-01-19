@@ -11,6 +11,7 @@ import br.com.ifba.produto.view.ProdutoListar;
 import br.com.ifba.usuario.view.UsuarioLogin;
 import br.com.ifba.usuario.view.UsuarioRegistrar;
 import org.springframework.stereotype.Component;
+import br.com.ifba.medicamento.view.MedicamentoListar;
 
 /**
  *
@@ -18,36 +19,38 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TelaInicial extends javax.swing.JFrame {
-    
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaInicial.class.getName());
 
     private final UsuarioRegistrar usuarioRegistrarTela;
-    
+
     private final FuncionariosListar funcionariosListar;
-    
+
     private final ProdutoListar produtoListar;
-    
+
     private final ClienteListar clienteListar;
-    
+
     private final UsuarioLogin usuarioLogin;
-    
+
     private final CompraListar compraListar;
+
+    private final MedicamentoListar medicamentoListar;
+
     /**
      * Creates new form TelaInicial
+     *
      * @param usuarioRegistrarTela
      */
-    public TelaInicial(CompraListar compraListar, UsuarioRegistrar usuarioRegistrarTela,UsuarioLogin usuarioLogin, FuncionariosListar funcionariosListar, ProdutoListar produtoListar, ClienteListar clienteListar) {
+    public TelaInicial(CompraListar compraListar, UsuarioRegistrar usuarioRegistrarTela, UsuarioLogin usuarioLogin, FuncionariosListar funcionariosListar, ProdutoListar produtoListar, ClienteListar clienteListar, MedicamentoListar medicamentoListar) {
         this.usuarioRegistrarTela = usuarioRegistrarTela;
         this.funcionariosListar = funcionariosListar;
         this.produtoListar = produtoListar;
         this.clienteListar = clienteListar;
         this.usuarioLogin = usuarioLogin;
         this.compraListar = compraListar;
+        this.medicamentoListar = medicamentoListar;
         initComponents();
     }
-    
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +68,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnClientes = new javax.swing.JButton();
         btnFuncionarios = new javax.swing.JButton();
         btnCompras = new javax.swing.JButton();
+        jToggleButton4 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +116,13 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton4.setText("Medicamentos");
+        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,7 +140,8 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCompras)
                             .addComponent(btnClientes)
-                            .addComponent(btnFuncionarios))))
+                            .addComponent(btnFuncionarios)))
+                    .addComponent(jToggleButton4))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -151,7 +163,9 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addComponent(btnFuncionarios)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClientes)))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton4)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,7 +184,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionariosActionPerformed
-        
+
         this.funcionariosListar.setVisible(true);
     }//GEN-LAST:event_btnFuncionariosActionPerformed
 
@@ -182,6 +196,10 @@ public class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.compraListar.setVisible(true);
     }//GEN-LAST:event_btnComprasActionPerformed
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
+        this.medicamentoListar.setVisible(true);
+    }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,5 +233,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton4;
     // End of variables declaration//GEN-END:variables
 }

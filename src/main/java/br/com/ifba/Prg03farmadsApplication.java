@@ -15,7 +15,6 @@ public class Prg03farmadsApplication {
                         .headless(false)
                         .run(args);
 
-        // temporario para testar o CRUD PRODUTOS, remover no projeto final
         TelaInicial telaPrincipal = context.getBean(TelaInicial.class);
 
         telaPrincipal.setVisible(true);

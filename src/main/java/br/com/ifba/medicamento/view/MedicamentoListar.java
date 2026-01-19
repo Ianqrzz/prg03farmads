@@ -1,7 +1,7 @@
-package br.com.ifba.produto.view;
+package br.com.ifba.medicamento.view;
 
-import br.com.ifba.produto.entity.Produto;
-import br.com.ifba.produto.controller.IProdutoController;
+import br.com.ifba.medicamento.entity.Medicamento;
+import br.com.ifba.medicamento.controller.IMedicamentoController;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -18,25 +18,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProdutoListar extends javax.swing.JFrame {
+public class MedicamentoListar extends javax.swing.JFrame {
 
     @Autowired
-    private IProdutoController produtoController;
+    private IMedicamentoController produtoController;
 
-    private static final Logger logger = Logger.getLogger(ProdutoListar.class.getName());
+    private static final Logger logger = Logger.getLogger(MedicamentoListar.class.getName());
     private TableRowSorter<DefaultTableModel> sorter;
 
-    public ProdutoListar() {
-        initComponents(); // O NetBeans cria a tabela básica aqui (provavelmente errada)
+    public MedicamentoListar() {
+        initComponents();
 
-        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{}, // Dados vazios iniciais
+        tblMedicamento.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
                 new String[]{
-                    "ID", "Nome", "Preço", "Qtd", "Custo", "Mínimo" // <--- TODAS AS 6 COLUNAS AQUI
+                    "ID", "Nome", "Preço", "Qtd", "Custo", "Mínimo", "Lote", "Validade", "Classificação", "Principio Ativo"
                 }
         ) {
-            // Define que nenhuma coluna é editável diretamente na tabela (clicando nela)
-            boolean[] canEdit = new boolean[]{false, false, false, false, false, false};
+            boolean[] canEdit = new boolean[]{false, false, false, false, false, false, false, false, false, false};
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
@@ -47,9 +46,9 @@ public class ProdutoListar extends javax.swing.JFrame {
         esconderColunaID();
         // --------------------------------------------------------
 
-        DefaultTableModel model = (DefaultTableModel) tblProduto.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblMedicamento.getModel();
         sorter = new TableRowSorter<>(model);
-        tblProduto.setRowSorter(sorter);
+        tblMedicamento.setRowSorter(sorter);
 
         btnEditar.setEnabled(false);
         btnExcluir.setEnabled(false);
@@ -69,7 +68,7 @@ public class ProdutoListar extends javax.swing.JFrame {
         txtPesquisar = new javax.swing.JTextPane();
         btnAdicionar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProduto = new javax.swing.JTable();
+        tblMedicamento = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
@@ -86,18 +85,18 @@ public class ProdutoListar extends javax.swing.JFrame {
             }
         });
 
-        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
+        tblMedicamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Valor", "Estoque", "Custo", "Estoque Minimo"
+                "Nome", "Valor", "Estoque", "Custo", "Estoque Minimo", "Lote", "Validade", "Classificacao Legal", "Principio Ativo"
             }
         ));
-        jScrollPane2.setViewportView(tblProduto);
+        jScrollPane2.setViewportView(tblMedicamento);
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +119,7 @@ public class ProdutoListar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -153,14 +152,14 @@ public class ProdutoListar extends javax.swing.JFrame {
     // --- NOVO MÉTODO: ESCONDE O ID ---
     private void esconderColunaID() {
         // Coluna 0 é a coluna do ID. Forçamos o tamanho dela a zero.
-        tblProduto.getColumnModel().getColumn(0).setMinWidth(0);
-        tblProduto.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblProduto.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tblMedicamento.getColumnModel().getColumn(0).setMinWidth(0);
+        tblMedicamento.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblMedicamento.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
 
     private void adicionarListenerSelecaoTabela() {
         // Pega o "modelo de seleção" da tabela e adiciona um "ouvinte" a ele
-        tblProduto.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        tblMedicamento.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 // 'e.getValueIsAdjusting()' evita disparos duplicados (ex: ao arrastar o mouse)
@@ -169,7 +168,7 @@ public class ProdutoListar extends javax.swing.JFrame {
 
                     // Verifica se alguma linha está realmente selecionada
                     // 'getSelectedRow()' retorna -1 se nada estiver selecionado.
-                    if (tblProduto.getSelectedRow() != -1) {
+                    if (tblMedicamento.getSelectedRow() != -1) {
                         // Se sim, HABILITA os botões
                         btnEditar.setEnabled(true);
                         btnExcluir.setEnabled(true);
@@ -184,20 +183,24 @@ public class ProdutoListar extends javax.swing.JFrame {
     }
 
     private void preencherTabela() {
-        DefaultTableModel model = (DefaultTableModel) tblProduto.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblMedicamento.getModel();
         model.setRowCount(0);
 
         try {
-            List<Produto> produtos = this.produtoController.findAll();
+            List<Medicamento> produtos = this.produtoController.findAll();
             if (produtos != null) {
-                for (Produto p : produtos) {
+                for (Medicamento p : produtos) {
                     model.addRow(new Object[]{
                         p.getId(),
                         p.getNome(),
                         p.getPreco(),
-                        p.getQtdEstoque(), // Novo
-                        p.getCusto(), // Novo
-                        p.getEstoqueMin() // Novo
+                        p.getQtdEstoque(), 
+                        p.getCusto(), 
+                        p.getEstoqueMin(), 
+                        p.getLote(), 
+                        p.getDataValidade(),
+                        p.getClassificacaoLegal(), 
+                        p.getPrincipioAtivo()
                     });
                 }
             }
@@ -207,27 +210,27 @@ public class ProdutoListar extends javax.swing.JFrame {
     }
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        ProdutoAdicionar telaAdicionar = new ProdutoAdicionar(this, true, this.produtoController);
+        MedicamentoAdicionar telaAdicionar = new MedicamentoAdicionar(this, true, this.produtoController);
         telaAdicionar.setVisible(true);
         preencherTabela();
 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        int selectedRow = tblProduto.getSelectedRow();
+        int selectedRow = tblMedicamento.getSelectedRow();
         if (selectedRow == -1) {
             return;
         }
 
-        int modelRow = tblProduto.convertRowIndexToModel(selectedRow);
+        int modelRow = tblMedicamento.convertRowIndexToModel(selectedRow);
 
         // PEGA O ID DA COLUNA 0 (Agora existe!)
-        Long id = (Long) tblProduto.getModel().getValueAt(modelRow, 0);
+        Long id = (Long) tblMedicamento.getModel().getValueAt(modelRow, 0);
 
         try {
-            Produto p = this.produtoController.findById(id);
+            Medicamento p = this.produtoController.findById(id);
 
-            ProdutoEditar telaEditar = new ProdutoEditar(this, true, p, this.produtoController);
+            MedicamentoEditar telaEditar = new MedicamentoEditar(this, true, p, this.produtoController);
             telaEditar.setVisible(true);
 
             preencherTabela();
@@ -237,16 +240,14 @@ public class ProdutoListar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int selectedRow = tblProduto.getSelectedRow();
+        int selectedRow = tblMedicamento.getSelectedRow();
         if (selectedRow == -1) {
             return;
         }
 
-        int modelRow = tblProduto.convertRowIndexToModel(selectedRow);
-
-        // PEGA O ID DA COLUNA 0
-        Long id = (Long) tblProduto.getModel().getValueAt(modelRow, 0);
-        String nome = (String) tblProduto.getModel().getValueAt(modelRow, 1);
+        int modelRow = tblMedicamento.convertRowIndexToModel(selectedRow);
+        Long id = (Long) tblMedicamento.getModel().getValueAt(modelRow, 0); // Pega o ID
+        String nome = (String) tblMedicamento.getModel().getValueAt(modelRow, 1);
 
         int confirm = JOptionPane.showConfirmDialog(this,
                 "Tem certeza que deseja excluir: " + nome + "?",
@@ -255,9 +256,12 @@ public class ProdutoListar extends javax.swing.JFrame {
 
         if (confirm == JOptionPane.YES_OPTION) {
             try {
-                this.produtoController.delete(id); // Chama Controller
+      
+                Medicamento medParaDeletar = this.produtoController.findById(id);
+                this.produtoController.delete(medParaDeletar);
+
                 preencherTabela();
-                JOptionPane.showMessageDialog(this, "Produto excluído!");
+                JOptionPane.showMessageDialog(this, "Medicamento excluído!");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro ao excluir: " + e.getMessage());
             }
@@ -310,7 +314,7 @@ public class ProdutoListar extends javax.swing.JFrame {
             logger.log(Level.SEVERE, null, ex);
         }
 
-        java.awt.EventQueue.invokeLater(() -> new ProdutoListar().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MedicamentoListar().setVisible(true));
     }
 
 
@@ -320,7 +324,7 @@ public class ProdutoListar extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblProduto;
+    private javax.swing.JTable tblMedicamento;
     private javax.swing.JTextPane txtPesquisar;
     // End of variables declaration//GEN-END:variables
 }

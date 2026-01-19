@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblEditarCurso" alignment="0" max="32767" attributes="0"/>
@@ -31,13 +31,19 @@
                   <Component id="lblValoredit" alignment="0" pref="388" max="32767" attributes="0"/>
                   <Component id="txtNomeedit" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtValoredit" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblValoredit1" alignment="0" pref="388" max="32767" attributes="0"/>
+                  <Component id="txtEditCusto" alignment="1" max="32767" attributes="0"/>
+                  <Component id="lblValoredit2" alignment="1" pref="388" max="32767" attributes="0"/>
+                  <Component id="txtEditQtdEstoque1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblValoredit3" alignment="1" pref="388" max="32767" attributes="0"/>
+                  <Component id="txtEditEstoqueMin" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
-              <Component id="btnEditarProduto" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnEditarProduto" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,9 +60,21 @@
               <Component id="lblValoredit" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtValoredit" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblValoredit1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtEditQtdEstoque1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblValoredit2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtEditCusto" min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblValoredit3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtEditEstoqueMin" min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnEditarProduto" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,7 +92,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblValoredit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Insira o novo valord do produto"/>
+        <Property name="text" type="java.lang.String" value="Insira o novo valor do produto"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomeedit">
@@ -91,6 +109,27 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="EDITANDO PRODUTO"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblValoredit1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insira a nova quantidade em estoque"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEditCusto">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblValoredit2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insira o novo custo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEditQtdEstoque1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblValoredit3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insira o novo estoque minimo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEditEstoqueMin">
     </Component>
   </SubComponents>
 </Form>

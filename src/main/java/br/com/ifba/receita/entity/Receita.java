@@ -30,7 +30,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 public class Receita extends PersistenceEntity implements Serializable{
     
-    @jakarta.persistence.ManyToOne // <--- Adicione isto!
+    @jakarta.persistence.ManyToOne
     @JoinColumn (name = "cliente", nullable = false)
     private Cliente cliente;
     

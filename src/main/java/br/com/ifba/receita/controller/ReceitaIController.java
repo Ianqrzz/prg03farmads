@@ -4,10 +4,24 @@
  */
 package br.com.ifba.receita.controller;
 
+import br.com.ifba.cliente.entity.Cliente;
+import br.com.ifba.receita.entity.Receita;
+
+import java.util.List;
+
 /**
  *
  * @author paulo
  */
+
 public interface ReceitaIController {
+    
+    public Receita save(Receita receita) throws RuntimeException;
+    
+    public List<Receita> findAll() throws RuntimeException;
+    
+    public Receita findById(Long ID) throws RuntimeException;
+    
+    public Receita findByCliente(Cliente cliente) throws RuntimeException;
     
 }

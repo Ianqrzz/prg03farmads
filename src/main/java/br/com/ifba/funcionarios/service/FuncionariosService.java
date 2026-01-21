@@ -40,16 +40,16 @@ public class FuncionariosService implements IFuncionariosService {
     }
 
     @Override
-    public Funcionarios update(Long id, Funcionarios funcionarios) {
-        log.info("SERVICE: Atualizando Funcionario ID: " + id);
+    public Funcionarios update(Funcionarios funcionarios) {
+        if(funcionarios == null){
+            throw new RuntimeException("Dados do " + "funcionario não preenchidos.");
+            
+        }else {
+            log.info("Editando o funcionario");
+            return funcionariosRepository.save(funcionarios);
+        }
 
-        Funcionarios funcionariosup = findById(id);
-
-        funcionariosup.setNome(funcionarios.getNome());
-        funcionariosup.setCargo(funcionarios.getCargo());
-        funcionariosup.setTotalVendas(funcionarios.getTotalVendas());
- 
-        return funcionariosRepository.save(funcionarios);
+      
     }
 
     @Override

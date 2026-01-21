@@ -38,7 +38,8 @@ public class FuncionariosController implements IFuncionariosController {
     @Override
     public Funcionarios update(Long id,Funcionarios funcionarios) {
         // Assume-se que o ID já está no objeto produto
-        return funcionariosService.update(funcionarios);
+        // NÃO, O ID NAO ESTAVA NO OBJETO PRODUTO! tem q passar por aqui
+        return funcionariosService.update(funcionarios.getId(), funcionarios);
     }
 
     @Override

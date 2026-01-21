@@ -14,7 +14,8 @@ import java.util.logging.Logger;
 
 @Service
 public class FuncionariosService implements IFuncionariosService {
-     // Logger manual (substituindo @Slf4j)
+    // Logger manual (substituindo @Slf4j)
+
     private static final Logger log = Logger.getLogger(FuncionariosService.class.getName());
 
     @Autowired
@@ -40,16 +41,10 @@ public class FuncionariosService implements IFuncionariosService {
     }
 
     @Override
-    public Funcionarios update(Funcionarios funcionarios) {
-        if(funcionarios == null){
-            throw new RuntimeException("Dados do " + "funcionario não preenchidos.");
-            
-        }else {
-            log.info("Editando o funcionario");
-            return funcionariosRepository.save(funcionarios);
-        }
-
-      
+    public Funcionarios update(Long id, Funcionarios funcionarios) {
+        // Garante que o objeto que está sendo salvo tem o ID correto da URL/Parâmetro
+        funcionarios.setId(id);
+        return funcionariosRepository.save(funcionarios);
     }
 
     @Override
@@ -60,17 +55,11 @@ public class FuncionariosService implements IFuncionariosService {
         }
         funcionariosRepository.deleteById(id);
     }
-    
+
     @Override
     @Transactional
     public void deleteById(Long id) {
         funcionariosRepository.deleteById(id);
-}
+    }
 
-   
-  
-
-    
-
-   
 }

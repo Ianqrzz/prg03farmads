@@ -51,7 +51,7 @@ public class ReceitaService implements ReceitaIService {
         } else if (receita.getNomeMedico().isBlank() ||
                    receita.getCrmMedico().isBlank() ||
                    receita.getNomeRemedio().isBlank() ||
-                   receita.getDosagem() == 0 ||
+                   receita.getDosagem() <= 0 ||
                    receita.getModoUso().isBlank() ||
                    receita.getDataEmissao() == null){
             // Verifica se as informações obrigatórias foram preenchidas

@@ -42,6 +42,7 @@
                           <Component id="btnFuncionarios" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="bntFornecedores" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="149" max="32767" attributes="0"/>
           </Group>
@@ -75,7 +76,9 @@
                   <Component id="jToggleButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVendas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="132" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="bntFornecedores" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="99" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -148,6 +151,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVendasActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="bntFornecedores">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fornecedores"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntFornecedoresActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

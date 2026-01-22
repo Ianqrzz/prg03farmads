@@ -16,6 +16,7 @@ import br.com.ifba.infraestructure.entity.PersistenceEntity;
 import br.com.ifba.cliente.entity.Cliente;
 import jakarta.persistence.JoinColumn;
 import java.util.Date;
+import lombok.NonNull;
 
 
 /**
@@ -30,25 +31,31 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 public class Receita extends PersistenceEntity implements Serializable{
     
+    @NonNull
     @jakarta.persistence.ManyToOne
     @JoinColumn (name = "cliente", nullable = false)
     private Cliente cliente;
     
+    @NonNull
     @Column (name = "nome_medico", nullable = false)
     private String nomeMedico;
     
+    @NonNull
     @Column (name = "crm_medico", nullable = false)
     private String crmMedico;
     
+    @NonNull
     @Column (name = "nome_remedio", nullable = false)
     private String nomeRemedio;
     
     @Column (name = "dosagem", nullable = false)
     private double dosagem;
     
+    @NonNull
     @Column (name = "modo_uso", nullable = false)
     private String modoUso;
     
+    @NonNull
     @Column (name = "data_emissao", nullable = false)
     private Date dataEmissao;
     

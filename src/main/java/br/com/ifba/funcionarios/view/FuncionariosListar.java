@@ -28,7 +28,8 @@ public class FuncionariosListar extends javax.swing.JFrame {
  
     @Autowired
     private IFuncionariosController funcionariosController;
-    private List<Funcionarios> listaFuncionarios;
+    
+    private List<Funcionarios> listaFuncionarios = new java.util.ArrayList<>();
     
     public FuncionariosListar() {
         initComponents();

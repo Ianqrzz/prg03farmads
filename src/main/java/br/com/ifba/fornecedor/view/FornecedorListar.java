@@ -95,7 +95,7 @@ public class FornecedorListar extends javax.swing.JDialog {
         bntEditar = new javax.swing.JButton();
         bntDeletar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblFornecedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,7 +197,7 @@ public class FornecedorListar extends javax.swing.JDialog {
             try{
                 Fornecedor fornecedor = fornecedorControler.findById(id);
                 
-                FornecedorEditar viewFornecedorEditar = new FornecedorEditar();
+                FornecedorEditar viewFornecedorEditar = context.getBean(FornecedorEditar.class);
                 viewFornecedorEditar.setFornecedor(fornecedor);
                 viewFornecedorEditar.setVisible(true);
                 

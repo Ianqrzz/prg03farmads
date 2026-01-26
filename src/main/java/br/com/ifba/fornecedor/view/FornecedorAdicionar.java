@@ -28,6 +28,7 @@ public class FornecedorAdicionar extends javax.swing.JDialog {
     public FornecedorAdicionar() {
         
         initComponents();
+        this.setModal(true);
     }
 
     /**
@@ -122,19 +123,22 @@ public class FornecedorAdicionar extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCnpj)
-                    .addComponent(txtTelefone)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCodigoCurso5)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCnpj, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(bntCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(bntCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtRazaoSocial, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblListaCursos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNomeFantasia)
-                            .addComponent(txtEmail)
-                            .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtRazaoSocial)
+                            .addComponent(lblListaCursos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNomeFantasia, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCodigoCurso1)
                                     .addComponent(lblCodigoCurso2)
@@ -142,10 +146,7 @@ public class FornecedorAdicionar extends javax.swing.JDialog {
                                     .addComponent(lblCodigoCurso4)
                                     .addComponent(lblCodigoCurso))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCodigoCurso5)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

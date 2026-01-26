@@ -26,20 +26,23 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtCnpj" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtTelefone" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblCodigoCurso5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="txtTelefone" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtCnpj" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="bntCadastrar" pref="243" max="32767" attributes="0"/>
+                              <Component id="bntSalvar" pref="243" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="bntCancelar" min="-2" pref="99" max="-2" attributes="0"/>
                           </Group>
                           <Component id="txtRazaoSocial" alignment="1" max="32767" attributes="0"/>
                           <Component id="lblListaCursos" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtNomeFantasia" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblCodigoCurso1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblCodigoCurso2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -49,12 +52,9 @@
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="txtNomeFantasia" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblCodigoCurso5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -89,7 +89,7 @@
               <Component id="lblCodigoCurso5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bntCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bntSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bntCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -154,12 +154,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="bntCadastrar">
+    <Component class="javax.swing.JButton" name="bntSalvar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cadastrar"/>
+        <Property name="text" type="java.lang.String" value="Salvar Edi&#xe7;&#xe3;o"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntCadastrarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntSalvarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bntCancelar">

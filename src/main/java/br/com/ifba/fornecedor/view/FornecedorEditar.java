@@ -28,7 +28,6 @@ public class FornecedorEditar extends javax.swing.JDialog {
      * Creates new form ReceitaAdd
      */
     public FornecedorEditar() {
-        
         initComponents();
         this.setModal(true);
     }
@@ -77,7 +76,7 @@ public class FornecedorEditar extends javax.swing.JDialog {
         txtTelefone = new javax.swing.JTextField();
         lblCodigoCurso4 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        bntCadastrar = new javax.swing.JButton();
+        bntSalvar = new javax.swing.JButton();
         bntCancelar = new javax.swing.JButton();
         lblCodigoCurso5 = new javax.swing.JLabel();
 
@@ -126,10 +125,10 @@ public class FornecedorEditar extends javax.swing.JDialog {
             }
         });
 
-        bntCadastrar.setText("Cadastrar");
-        bntCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        bntSalvar.setText("Salvar Edição");
+        bntSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntCadastrarActionPerformed(evt);
+                bntSalvarActionPerformed(evt);
             }
         });
 
@@ -149,30 +148,30 @@ public class FornecedorEditar extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCnpj)
-                    .addComponent(txtTelefone)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bntCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                        .addComponent(lblCodigoCurso5)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCnpj, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(bntSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(bntCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtRazaoSocial, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblListaCursos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNomeFantasia)
-                            .addComponent(txtEmail)
-                            .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtRazaoSocial)
+                            .addComponent(lblListaCursos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCodigoCurso1)
                                     .addComponent(lblCodigoCurso2)
                                     .addComponent(lblCodigoCurso3)
                                     .addComponent(lblCodigoCurso4)
                                     .addComponent(lblCodigoCurso))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCodigoCurso5)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtNomeFantasia, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +202,7 @@ public class FornecedorEditar extends javax.swing.JDialog {
                 .addComponent(lblCodigoCurso5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntCadastrar)
+                    .addComponent(bntSalvar)
                     .addComponent(bntCancelar))
                 .addContainerGap())
         );
@@ -231,7 +230,7 @@ public class FornecedorEditar extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void bntCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCadastrarActionPerformed
+    private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         
         String razaoSocial = txtRazaoSocial.getText();
         String nomeFantasia = txtNomeFantasia.getText();
@@ -244,17 +243,21 @@ public class FornecedorEditar extends javax.swing.JDialog {
             return;
         }
         
-        Fornecedor fornecedor = new Fornecedor(razaoSocial, nomeFantasia, cnpj, telefone, email);
-        
         try{
-            fornecedorController.update(fornecedor);
+            this.fornecedorEdicao.setRazaoSocial(razaoSocial);
+            this.fornecedorEdicao.setNomefantasia(nomeFantasia);
+            this.fornecedorEdicao.setCnpj(cnpj);
+            this.fornecedorEdicao.setTelefone(telefone);
+            this.fornecedorEdicao.setEmail(email);
+            
+            fornecedorController.update(this.fornecedorEdicao);
             JOptionPane.showMessageDialog(this, "Fornecedor Atualizado com Sucesso");
             this.dispose();
             
         } catch (RuntimeException e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_bntCadastrarActionPerformed
+    }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
         this.dispose();
@@ -265,8 +268,8 @@ public class FornecedorEditar extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntCadastrar;
     private javax.swing.JButton bntCancelar;
+    private javax.swing.JButton bntSalvar;
     private javax.swing.JLabel lblCodigoCurso;
     private javax.swing.JLabel lblCodigoCurso1;
     private javax.swing.JLabel lblCodigoCurso2;

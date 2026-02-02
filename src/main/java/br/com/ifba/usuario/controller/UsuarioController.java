@@ -5,20 +5,20 @@
 package br.com.ifba.usuario.controller;
 
 import br.com.ifba.usuario.entity.Usuario;
-import br.com.ifba.usuario.service.IUsuarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import br.com.ifba.usuario.service.UsuarioIService;
 
 /**
  *
  * @author ianep
  */
 @Controller
-public class UsuarioController implements IUsuarioController{
+public class UsuarioController implements UsuarioIController{
     
     @Autowired
-    private IUsuarioService usuarioService;
+    private UsuarioIService usuarioService;
 
     @Override
     public Usuario save(Usuario user) {
@@ -27,7 +27,7 @@ public class UsuarioController implements IUsuarioController{
 
     @Override
     public Usuario findById(Long id) {
-        return usuarioService.getByID(id);
+        return usuarioService.findByID(id);
 
     }
 

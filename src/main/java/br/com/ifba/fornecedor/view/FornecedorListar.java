@@ -11,6 +11,9 @@ import br.com.ifba.fornecedor.entity.Fornecedor;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import jakarta.annotation.PostConstruct;
+import java.awt.Cursor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +97,7 @@ public class FornecedorListar extends javax.swing.JDialog {
         bntCadastrarNovo = new javax.swing.JButton();
         bntEditar = new javax.swing.JButton();
         bntDeletar = new javax.swing.JButton();
+        bntAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -145,6 +149,13 @@ public class FornecedorListar extends javax.swing.JDialog {
             }
         });
 
+        bntAtualizar.setText("🔄️");
+        bntAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAtualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,6 +167,8 @@ public class FornecedorListar extends javax.swing.JDialog {
                     .addComponent(lblListaFornecedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bntCadastrarNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bntEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -171,7 +184,8 @@ public class FornecedorListar extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntCadastrarNovo)
                     .addComponent(bntEditar)
-                    .addComponent(bntDeletar))
+                    .addComponent(bntDeletar)
+                    .addComponent(bntAtualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                 .addContainerGap())
@@ -185,14 +199,16 @@ public class FornecedorListar extends javax.swing.JDialog {
         FornecedorAdicionar viewFornecedorAdicionar = context.getBean(FornecedorAdicionar.class);
         viewFornecedorAdicionar.setLocationRelativeTo(this);
         viewFornecedorAdicionar.setVisible(true);
+        
         this.loadTableFornecedor();
     }//GEN-LAST:event_bntCadastrarNovoActionPerformed
 
     private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
         int linha = tblFornecedores.getSelectedRow();
         
-        if (linha != 0){
+        if (linha >= 0){
             Long id = (Long) tblFornecedores.getValueAt(linha, 0);
+            System.out.println(id);
             
             try{
                 Fornecedor fornecedor = fornecedorControler.findById(id);
@@ -201,7 +217,7 @@ public class FornecedorListar extends javax.swing.JDialog {
                 viewFornecedorEditar.setFornecedor(fornecedor);
                 viewFornecedorEditar.setVisible(true);
                 
-                loadTableFornecedor();
+                this.loadTableFornecedor();
                 
             } catch (RuntimeException e){
                 log.error("Erro ao carregar fornecedor para edição");
@@ -213,7 +229,7 @@ public class FornecedorListar extends javax.swing.JDialog {
     private void bntDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDeletarActionPerformed
         int linha = tblFornecedores.getSelectedRow();
         
-        if (linha != 0){
+        if (linha >= 0){
             Long id = (Long) tblFornecedores.getValueAt(linha, 0);
             
             int resposta = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir esse fornecedor?", "Excluir", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -232,7 +248,14 @@ public class FornecedorListar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_bntDeletarActionPerformed
 
+    private void bntAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtualizarActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        this.loadTableFornecedor();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_bntAtualizarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntAtualizar;
     private javax.swing.JButton bntCadastrarNovo;
     private javax.swing.JButton bntDeletar;
     private javax.swing.JButton bntEditar;

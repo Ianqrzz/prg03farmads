@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -30,6 +30,8 @@
                   <Component id="lblListaFornecedores" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="bntCadastrarNovo" min="-2" pref="124" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="bntAtualizar" min="-2" pref="49" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="bntEditar" min="-2" pref="93" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -50,6 +52,7 @@
                   <Component id="bntCadastrarNovo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bntEditar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bntDeletar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bntAtualizar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="483" max="32767" attributes="0"/>
@@ -148,6 +151,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntDeletarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="bntAtualizar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="\ud83d\udd04&#xfe0f;" containsInvalidXMLChars="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntAtualizarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

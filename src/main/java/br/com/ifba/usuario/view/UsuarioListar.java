@@ -1,5 +1,6 @@
 package br.com.ifba.usuario.view;
 
+import br.com.ifba.usuario.controller.IUsuarioController;
 import br.com.ifba.usuario.entity.Usuario;
 import java.util.List;
 import java.util.logging.Logger;
@@ -14,13 +15,12 @@ import javax.swing.event.ListSelectionListener;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import br.com.ifba.usuario.controller.UsuarioIController;
 
 @Component
 public class UsuarioListar extends javax.swing.JFrame {
 
     @Autowired
-    private UsuarioIController usuarioController;
+    private IUsuarioController usuarioController;
 
     private static final Logger logger = Logger.getLogger(UsuarioListar.class.getName());
     private TableRowSorter<DefaultTableModel> sorter;
@@ -30,7 +30,7 @@ public class UsuarioListar extends javax.swing.JFrame {
 
         // --- ADICIONE ESTE BLOCO PARA FORÇAR O MODELO CORRETO ---
         // 1. Recria o modelo com 3 colunas: ID, Nome, Preço
-        tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{"ID", "Login", "Senha"}
         ) {
@@ -48,9 +48,9 @@ public class UsuarioListar extends javax.swing.JFrame {
         esconderColunaID();
         // --------------------------------------------------------
 
-        DefaultTableModel model = (DefaultTableModel) tblUsuario.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblProduto.getModel();
         sorter = new TableRowSorter<>(model);
-        tblUsuario.setRowSorter(sorter);
+        tblProduto.setRowSorter(sorter);
 
         btnEditar.setEnabled(false);
         btnExcluir.setEnabled(false);
@@ -70,7 +70,7 @@ public class UsuarioListar extends javax.swing.JFrame {
         txtPesquisar = new javax.swing.JTextPane();
         btnAdicionar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblUsuario = new javax.swing.JTable();
+        tblProduto = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
@@ -87,7 +87,7 @@ public class UsuarioListar extends javax.swing.JFrame {
             }
         });
 
-        tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -98,7 +98,7 @@ public class UsuarioListar extends javax.swing.JFrame {
                 "Login", "Senha"
             }
         ));
-        jScrollPane2.setViewportView(tblUsuario);
+        jScrollPane2.setViewportView(tblProduto);
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -153,14 +153,14 @@ public class UsuarioListar extends javax.swing.JFrame {
     // --- NOVO MÉTODO: ESCONDE O ID ---
     private void esconderColunaID() {
         // Coluna 0 é a coluna do ID. Forçamos o tamanho dela a zero.
-        tblUsuario.getColumnModel().getColumn(0).setMinWidth(0);
-        tblUsuario.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblUsuario.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tblProduto.getColumnModel().getColumn(0).setMinWidth(0);
+        tblProduto.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblProduto.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
 
     private void adicionarListenerSelecaoTabela() {
         // Pega o "modelo de seleção" da tabela e adiciona um "ouvinte" a ele
-        tblUsuario.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        tblProduto.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 // 'e.getValueIsAdjusting()' evita disparos duplicados (ex: ao arrastar o mouse)
@@ -169,7 +169,7 @@ public class UsuarioListar extends javax.swing.JFrame {
 
                     // Verifica se alguma linha está realmente selecionada
                     // 'getSelectedRow()' retorna -1 se nada estiver selecionado.
-                    if (tblUsuario.getSelectedRow() != -1) {
+                    if (tblProduto.getSelectedRow() != -1) {
                         // Se sim, HABILITA os botões
                         btnEditar.setEnabled(true);
                         btnExcluir.setEnabled(true);
@@ -184,7 +184,7 @@ public class UsuarioListar extends javax.swing.JFrame {
     }
 
     private void preencherTabela() {
-        DefaultTableModel model = (DefaultTableModel) tblUsuario.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblProduto.getModel();
         model.setRowCount(0);
 
         try {
@@ -207,15 +207,15 @@ public class UsuarioListar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        int selectedRow = tblUsuario.getSelectedRow();
+        int selectedRow = tblProduto.getSelectedRow();
         if (selectedRow == -1) {
             return;
         }
 
-        int modelRow = tblUsuario.convertRowIndexToModel(selectedRow);
+        int modelRow = tblProduto.convertRowIndexToModel(selectedRow);
 
         // PEGA O ID DA COLUNA 0 (Agora existe!)
-        Long id = (Long) tblUsuario.getModel().getValueAt(modelRow, 0);
+        Long id = (Long) tblProduto.getModel().getValueAt(modelRow, 0);
 
         try {
             Usuario p = this.usuarioController.findById(id);
@@ -230,16 +230,16 @@ public class UsuarioListar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int selectedRow = tblUsuario.getSelectedRow();
+        int selectedRow = tblProduto.getSelectedRow();
         if (selectedRow == -1) {
             return;
         }
 
-        int modelRow = tblUsuario.convertRowIndexToModel(selectedRow);
+        int modelRow = tblProduto.convertRowIndexToModel(selectedRow);
 
         // PEGA O ID DA COLUNA 0
-        Long id = (Long) tblUsuario.getModel().getValueAt(modelRow, 0);
-        String nome = (String) tblUsuario.getModel().getValueAt(modelRow, 1);
+        Long id = (Long) tblProduto.getModel().getValueAt(modelRow, 0);
+        String nome = (String) tblProduto.getModel().getValueAt(modelRow, 1);
 
         int confirm = JOptionPane.showConfirmDialog(this,
                 "Tem certeza que deseja excluir: " + nome + "?",
@@ -305,7 +305,7 @@ public class UsuarioListar extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblUsuario;
+    private javax.swing.JTable tblProduto;
     private javax.swing.JTextPane txtPesquisar;
     // End of variables declaration//GEN-END:variables
 }

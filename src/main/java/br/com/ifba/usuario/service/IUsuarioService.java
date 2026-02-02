@@ -11,10 +11,10 @@ import java.util.List;
  *
  * @author ianep
  */
-public interface UsuarioIService {
+public interface IUsuarioService {
     
     public Usuario save(Usuario user);
-    public Usuario findByID(Long id);
+    public Usuario getByID(Long id);
     public List<Usuario> findAll();
     public Usuario update(Usuario user);
     void delete(Usuario user);

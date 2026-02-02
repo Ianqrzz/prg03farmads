@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author ianep
  */
-public interface UsuarioIController {
+public interface IUsuarioController {
     
     Usuario save(Usuario user);
     

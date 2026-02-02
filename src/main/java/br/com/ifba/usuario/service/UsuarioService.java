@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @author ianep
  */
 @Service
-public class UsuarioService implements UsuarioIService{
+public class UsuarioService implements IUsuarioService{
 
     
     private final UsuarioRepository usuarioRepository;
@@ -46,7 +46,7 @@ public class UsuarioService implements UsuarioIService{
     }
 
     @Override
-    public Usuario findByID(Long id) {
+    public Usuario getByID(Long id) {
         return usuarioRepository.findById(id).orElse(null);
    }
 

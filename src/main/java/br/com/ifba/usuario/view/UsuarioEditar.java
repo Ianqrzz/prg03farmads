@@ -1,17 +1,17 @@
 package br.com.ifba.usuario.view;
 
+import br.com.ifba.usuario.controller.IUsuarioController;
 import br.com.ifba.usuario.entity.Usuario;
 import javax.swing.JOptionPane;
 import java.awt.Frame;
-import br.com.ifba.usuario.controller.UsuarioIController;
 
 public class UsuarioEditar extends javax.swing.JDialog {
 
     
     private Usuario usuario;
-    private UsuarioIController controller; // CORRETO: Variável é o Controller
+    private IUsuarioController controller; // CORRETO: Variável é o Controller
 
-    public UsuarioEditar(Frame parent, boolean modal,Usuario usuario, UsuarioIController controller) { // CORRETO: Construtor espera Controller
+    public UsuarioEditar(Frame parent, boolean modal,Usuario usuario, IUsuarioController controller) { // CORRETO: Construtor espera Controller
         super(parent, modal);
         initComponents();
         this.usuario = usuario;

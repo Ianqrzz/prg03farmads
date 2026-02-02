@@ -33,19 +33,16 @@
                           <Component id="jToggleButton3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jToggleButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jToggleButton4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="bntFornecedores" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnVendas" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCompras" min="-2" max="-2" attributes="0"/>
                           <Component id="btnClientes" min="-2" max="-2" attributes="0"/>
                           <Component id="btnFuncionarios" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="btnConvenios" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnVendas" min="-2" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                   </Group>
+                  <Component id="bntFornecedores" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="149" max="32767" attributes="0"/>
           </Group>
@@ -80,10 +77,7 @@
                   <Component id="btnVendas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bntFornecedores" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnConvenios" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="bntFornecedores" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="99" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -165,14 +159,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntFornecedoresActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnConvenios">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Convenios"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConveniosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

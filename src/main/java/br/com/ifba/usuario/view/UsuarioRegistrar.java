@@ -4,10 +4,10 @@
  */
 package br.com.ifba.usuario.view;
 
-import br.com.ifba.usuario.controller.IUsuarioController;
 import br.com.ifba.usuario.entity.Usuario;
 import javax.swing.JOptionPane;
 import org.springframework.stereotype.Component;
+import br.com.ifba.usuario.controller.UsuarioIController;
 
 /**
  *
@@ -18,13 +18,13 @@ public class UsuarioRegistrar extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UsuarioRegistrar.class.getName());
     
-    private final IUsuarioController controller;
+    private final UsuarioIController controller;
 
     /**
      * Creates new form UsuarioRegistrar
      * @param controller
      */
-    public UsuarioRegistrar(IUsuarioController controller) {
+    public UsuarioRegistrar(UsuarioIController controller) {
         this.controller = controller;
         initComponents();
         this.setLocationRelativeTo(null);

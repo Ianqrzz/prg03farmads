@@ -4,8 +4,11 @@
  */
 package br.com.ifba.cliente.entity;
 
+import br.com.ifba.convenio.entity.Convenio;
 import br.com.ifba.infraestructure.entity.PersistenceEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +29,10 @@ public class Cliente extends PersistenceEntity{
     String endereco;
     String telefone;
     String email;
+    
+    @ManyToOne
+    @JoinColumn(name = "Convenios")
+    Convenio convenio;
 
     //Construtor da classe
     public Cliente() {

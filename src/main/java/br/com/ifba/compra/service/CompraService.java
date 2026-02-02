@@ -4,9 +4,11 @@
  */
 package br.com.ifba.compra.service;
 
+import br.com.ifba.cliente.service.ClienteService;
 import br.com.ifba.compra.entity.Compra;
 import br.com.ifba.compra.repository.CompraRepository;
 import java.util.List;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class CompraService implements CompraIService {
     
     private final CompraRepository repository;
+    private static final Logger log = Logger.getLogger(ClienteService.class.getName());
 
     @Autowired
     public CompraService(CompraRepository repository) {
@@ -31,6 +34,8 @@ public class CompraService implements CompraIService {
         
         //entity.setDataLancamento(LocalDate.now());
         
+        log.info("Compra Catalogada, Numero: " + entity.getNumeroNF());
+        
         return repository.save(entity);
     }
 
@@ -41,6 +46,7 @@ public class CompraService implements CompraIService {
 
     @Override
     public void delete(Compra entity) {
+        log.info("Compra deletada, Numero: " + entity.getNumeroNF());
         repository.deleteById(entity.getId());
     }
 

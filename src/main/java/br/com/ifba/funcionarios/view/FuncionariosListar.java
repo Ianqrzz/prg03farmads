@@ -33,6 +33,7 @@ public class FuncionariosListar extends javax.swing.JFrame {
     
     public FuncionariosListar() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     @PostConstruct
     public void init() {

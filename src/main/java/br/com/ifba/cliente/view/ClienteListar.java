@@ -31,6 +31,7 @@ public class ClienteListar extends javax.swing.JFrame {
     
     public ClienteListar() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     @PostConstruct
     public void init() {

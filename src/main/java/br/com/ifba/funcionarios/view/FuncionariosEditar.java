@@ -24,6 +24,7 @@ public class FuncionariosEditar extends javax.swing.JDialog {
     this.controller = controller;
     initComponents();
     preencherCampos();
+    this.setLocationRelativeTo(null);
    
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE); 
 }

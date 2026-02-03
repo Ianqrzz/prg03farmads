@@ -5,9 +5,13 @@
 package br.com.ifba.usuario.view;
 
 import br.com.ifba.usuario.entity.Usuario;
+import br.com.ifba.view.TelaInicial; // Import da Tela Inicial
 import javax.swing.JOptionPane;
 import org.springframework.stereotype.Component;
 import br.com.ifba.usuario.controller.UsuarioIController;
+import org.springframework.beans.factory.annotation.Autowired; // Import Autowired
+import org.springframework.context.annotation.Lazy; // Import Lazyler;
+import org.springframework.context.annotation.Lazy;
 
 /**
  *
@@ -15,17 +19,29 @@ import br.com.ifba.usuario.controller.UsuarioIController;
  */
 @Component
 public class UsuarioLogin extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UsuarioLogin.class.getName());
     private final UsuarioIController usuarioController;
 
+    // Injeção da Tela Inicial (Lazy para evitar ciclo)
+    @Autowired
+    @Lazy
+    private TelaInicial telaInicial;
+
+    // Injeção da Tela de Registro (Lazy)
+    @Autowired
+    @Lazy
+    private UsuarioRegistrar usuarioRegistrar;
+
     /**
      * Creates new form UsuarioLogin
+     *
      * @param usuarioController
      */
     public UsuarioLogin(UsuarioIController usuarioController) {
         initComponents();
         this.usuarioController = usuarioController;
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -79,46 +95,39 @@ public class UsuarioLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegistrar))))
-                .addContainerGap(121, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtLogin, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogin))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(btnLogin)
-                .addGap(18, 18, 18)
-                .addComponent(btnRegistrar)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistrar))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,30 +138,58 @@ public class UsuarioLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLoginActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        
-        try{
-        Usuario usuarioLogin = new Usuario();
-        
-        usuarioLogin.setLogin(txtLogin.getText());
-        usuarioLogin.setSenha(txtSenha.getText());
-        
-        usuarioController.login(usuarioLogin);
-        JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!");
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao efetuar Login:" + e.getMessage());
+
+        String login = txtLogin.getText();
+        String senha = txtSenha.getText();
+
+        try {
+            // 1. Tenta validar o login (Método novo que adicionamos no Controller/Service)
+            if (usuarioController.validarLogin(login, senha)) {
+                // SUCESSO!
+                Usuario usuario = usuarioController.buscarPorLogin(login);
+
+                // Passa o usuário para a tela principal
+                telaInicial.definirUsuario(usuario);
+
+                JOptionPane.showMessageDialog(this, "Bem-vindo, " + usuario.getNome() + "!");
+
+                telaInicial.setVisible(true);
+                this.setVisible(false); // Esconde o login
+
+                // Limpa campos
+                txtLogin.setText("");
+                txtSenha.setText("");
+
+            } else {
+                // FALHA! Verifica se usuário existe
+                Usuario usuarioExistente = usuarioController.buscarPorLogin(login);
+
+                if (usuarioExistente == null) {
+                    // NÃO EXISTE -> Redireciona para Registrar
+                    JOptionPane.showMessageDialog(this, "Usuário não encontrado!\nRedirecionando para cadastro...");
+                    usuarioRegistrar.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    // EXISTE, MAS SENHA ERRADA
+                    JOptionPane.showMessageDialog(this, "Senha incorreta!");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro no sistema: " + e.getMessage());
+            e.printStackTrace();
         }
-        
-        
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        // Botão manual para ir para registro
+        usuarioRegistrar.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;

@@ -34,6 +34,7 @@ public class CompraEditar extends javax.swing.JFrame {
         initComponents();
         preencherCampos();
         funcionariosListar();
+        this.setLocationRelativeTo(null);
     }
 
     private void preencherCampos() {

@@ -38,6 +38,7 @@ public class CompraAdicionar extends javax.swing.JFrame {
         this.funcionarioController = funcionarioController;
         initComponents();
         funcionariosListar();
+        this.setLocationRelativeTo(null);
     }
 
     private void funcionariosListar(){

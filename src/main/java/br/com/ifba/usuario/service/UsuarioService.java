@@ -17,28 +17,27 @@ import org.springframework.stereotype.Service;
  * @author ianep
  */
 @Service
-public class UsuarioService implements UsuarioIService{
+public class UsuarioService implements UsuarioIService {
 
-    
     private final UsuarioRepository usuarioRepository;
-    
-     public UsuarioService(UsuarioRepository usuarioRepository){
+
+    public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
-     private static final Logger log = LoggerFactory.
+    private static final Logger log = LoggerFactory.
             getLogger(UsuarioService.class);
+
     @Override
     public Usuario save(Usuario user) {
-        
-        if (StringUtil.isNullOrEmpty(user.getLogin())){
-            
+
+        if (StringUtil.isNullOrEmpty(user.getLogin())) {
+
             throw new RuntimeException("Login do " + "Usuario não preenchidos.");
-            
+
         }
-       
-        if(StringUtil.isNullOrEmpty(user.getSenha())){
-            
-            
+
+        if (StringUtil.isNullOrEmpty(user.getSenha())) {
+
             throw new RuntimeException("Senha " + "Não preenchida.");
         }
         log.info("Salvando novo Usuario");
@@ -48,7 +47,7 @@ public class UsuarioService implements UsuarioIService{
     @Override
     public Usuario findByID(Long id) {
         return usuarioRepository.findById(id).orElse(null);
-   }
+    }
 
     @Override
     public List<Usuario> findAll() {
@@ -57,9 +56,9 @@ public class UsuarioService implements UsuarioIService{
 
     @Override
     public Usuario update(Usuario user) {
-        if(user == null){
+        if (user == null) {
             throw new RuntimeException("Dados do " + "usuario não preenchidos.");
-        }else{
+        } else {
             log.info("Editando o Usuario");
             return usuarioRepository.save(user);
         }
@@ -67,23 +66,23 @@ public class UsuarioService implements UsuarioIService{
 
     @Override
     public void delete(Usuario user) {
-        if(user == null){
+        if (user == null) {
             throw new RuntimeException("Dados do " + "Usuario não preenchidos.");
-        }else if(user.getId() == null){
+        } else if (user.getId() == null) {
             throw new RuntimeException("Usuario não existente no banco de dados");
-        }else{
+        } else {
             log.info("Excluindo o Usuario");
             usuarioRepository.delete(user);
-        }      
+        }
     }
 
     @Override
-    public boolean login(Usuario user){
-        
+    public boolean login(Usuario user) {
+
         //metodo que efetua o login do usuario no programa
         Usuario login = usuarioRepository.findByLogin(user.getLogin());
         //checa se o usuario é existente na base de dados
-        if(login == null){
+        if (login == null) {
             throw new RuntimeException("Usuario não existente");
         }
         //se o usuario for existente na base de dados, verifica se a senha enviada é a mesma da registrada na base de dados
@@ -93,10 +92,22 @@ public class UsuarioService implements UsuarioIService{
             log.info("Login do usuario efeutado");
             return true;
         }
-        
-        
-        
+
     }
-    
-    
+
+    @Override
+    public Usuario buscarPorLogin(String login) {
+        return usuarioRepository.findByLogin(login);
+    }
+
+    @Override
+    public boolean validarLogin(String login, String senha) {
+        Usuario usuario = usuarioRepository.findByLogin(login);
+        // Verifica se usuário existe E se a senha bate
+        if (usuario != null && usuario.getSenha().equals(senha)) {
+            return true;
+        }
+        return false;
+    }
+
 }

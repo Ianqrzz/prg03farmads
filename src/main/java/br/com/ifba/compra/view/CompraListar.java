@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CompraListar extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CompraListar.class.getName());
 
     /**
@@ -28,18 +28,20 @@ public class CompraListar extends javax.swing.JFrame {
      */
     @Autowired
     private CompraIController controller;
-    
+
     private List<Compra> listaCompras;
-    
+
     @Autowired
     private FuncionariosController funcionarioController;
-    
+
     public CompraListar() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
+
     @PostConstruct
     public void init() {
-        
+
         preencherTabela();
     }
 
@@ -48,23 +50,22 @@ public class CompraListar extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblCompra.getModel();
         model.setRowCount(0);
 
-    listaCompras = controller.findAll();
+        listaCompras = controller.findAll();
 
-    if (listaCompras != null) {
-        for (Compra compra : listaCompras) {
-            model.addRow(new Object[]{
-                compra.getNumeroNF(),
-                compra.getDataLancamento().toString(),
-                compra.getValorTotal(),
-                compra.getFuncionario().getNome(),
-                compra.getStatus(),
-                compra.getChaveNF()
-            });
+        if (listaCompras != null) {
+            for (Compra compra : listaCompras) {
+                model.addRow(new Object[]{
+                    compra.getNumeroNF(),
+                    compra.getDataLancamento().toString(),
+                    compra.getValorTotal(),
+                    compra.getFuncionario().getNome(),
+                    compra.getStatus(),
+                    compra.getChaveNF()
+                });
+            }
         }
     }
-    }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,76 +197,76 @@ public class CompraListar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-           
+
         CompraAdicionar telaAdd = new CompraAdicionar(this, true, controller, funcionarioController);
         telaAdd.setVisible(true);
-        
+
         preencherTabela();
-        
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        
-    int linhaSelecionada = tblCompra.getSelectedRow();
 
-    if (linhaSelecionada == -1) {
-        JOptionPane.showMessageDialog(
-            this,
-            "Selecione um cliente para excluir!",
-            "Atenção",
-            JOptionPane.WARNING_MESSAGE
+        int linhaSelecionada = tblCompra.getSelectedRow();
+
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Selecione um cliente para excluir!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        Compra compraSelecionada = listaCompras.get(linhaSelecionada);
+        Long id = compraSelecionada.getId();
+
+        int confirmacao = JOptionPane.showConfirmDialog(
+                this,
+                "Deseja realmente excluir a compra:\n" + compraSelecionada.getNumeroNF() + "?",
+                "Confirmar Exclusão",
+                JOptionPane.YES_NO_OPTION
         );
-        return;
-    }
 
-    Compra compraSelecionada = listaCompras.get(linhaSelecionada);
-    Long id = compraSelecionada.getId();
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            controller.deleteById(id);
+            preencherTabela();
 
-    int confirmacao = JOptionPane.showConfirmDialog(
-        this,
-        "Deseja realmente excluir a compra:\n" + compraSelecionada.getNumeroNF() + "?",
-        "Confirmar Exclusão",
-        JOptionPane.YES_NO_OPTION
-    );
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Cliente excluído com sucesso!",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        }
 
-    if (confirmacao == JOptionPane.YES_OPTION) {
-        controller.deleteById(id);
-        preencherTabela();
-
-        JOptionPane.showMessageDialog(
-            this,
-            "Cliente excluído com sucesso!",
-            "Sucesso",
-            JOptionPane.INFORMATION_MESSAGE
-        );
-    }
-        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         int linhaSelecionada = tblCompra.getSelectedRow();
 
-    if (linhaSelecionada == -1) {
-        JOptionPane.showMessageDialog(
-            this,
-            "Selecione um cliente para editar!",
-            "Atenção",
-            JOptionPane.WARNING_MESSAGE
-        );
-        return;
-    }
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Selecione um cliente para editar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
 
-    Compra compraSelecionado = listaCompras.get(linhaSelecionada);
+        Compra compraSelecionado = listaCompras.get(linhaSelecionada);
 
-    CompraEditar telaEditar =
-        new CompraEditar(compraSelecionado, controller, funcionarioController);
+        CompraEditar telaEditar
+                = new CompraEditar(compraSelecionado, controller, funcionarioController);
 
-    telaEditar.setVisible(true);
+        telaEditar.setVisible(true);
 
-    preencherTabela(); // refresh após edição
-        
+        preencherTabela(); // refresh após edição
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnResetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetarActionPerformed
@@ -277,31 +278,30 @@ public class CompraListar extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nomePesquisado = txtPesquisa.getText().trim().toLowerCase();
 
-    DefaultTableModel model = (DefaultTableModel) tblCompra.getModel();
-    model.setRowCount(0); // limpa a tabela
+        DefaultTableModel model = (DefaultTableModel) tblCompra.getModel();
+        model.setRowCount(0); // limpa a tabela
 
-    if (nomePesquisado.isEmpty()) {
-        preencherTabela();
-        return;
-    }
-
-    for (Compra compra : listaCompras) {
-        if (compra.getNumeroNF().toLowerCase().contains(nomePesquisado)) {
-            model.addRow(new Object[]{
-                compra.getNumeroNF(),
-                compra.getDataLancamento().toString(),
-                compra.getValorTotal(),
-                compra.getFuncionario().getNome(),
-                compra.getStatus()
-            });
+        if (nomePesquisado.isEmpty()) {
+            preencherTabela();
+            return;
         }
-    }
+
+        for (Compra compra : listaCompras) {
+            if (compra.getNumeroNF().toLowerCase().contains(nomePesquisado)) {
+                model.addRow(new Object[]{
+                    compra.getNumeroNF(),
+                    compra.getDataLancamento().toString(),
+                    compra.getValorTotal(),
+                    compra.getFuncionario().getNome(),
+                    compra.getStatus()
+                });
+            }
+        }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;

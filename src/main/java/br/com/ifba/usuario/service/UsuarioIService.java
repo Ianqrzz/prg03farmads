@@ -12,11 +12,21 @@ import java.util.List;
  * @author ianep
  */
 public interface UsuarioIService {
-    
+
     public Usuario save(Usuario user);
+
     public Usuario findByID(Long id);
+
     public List<Usuario> findAll();
+
     public Usuario update(Usuario user);
+
     void delete(Usuario user);
+
     boolean login(Usuario user);
+
+    public Usuario buscarPorLogin(String login);
+
+    boolean validarLogin(String login, String senha);
+
 }

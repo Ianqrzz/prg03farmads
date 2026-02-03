@@ -18,10 +18,10 @@ import org.springframework.context.annotation.Scope;
 @Component
 @Scope("prototype")
 public class FornecedorEditar extends javax.swing.JDialog {
-    
+
     @Autowired
     private FornecedorIController fornecedorController;
-    
+
     private Fornecedor fornecedorEdicao = null;
 
     /**
@@ -30,21 +30,23 @@ public class FornecedorEditar extends javax.swing.JDialog {
     public FornecedorEditar() {
         initComponents();
         this.setModal(true);
+        this.setLocationRelativeTo(null);
     }
-    
-    public void setFornecedor(Fornecedor fornecedor){
+
+    public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedorEdicao = fornecedor;
         this.preencherInformações(fornecedorEdicao);
-        
+
     }
-    
-    public void preencherInformações(Fornecedor fornecedor){
+
+    public void preencherInformações(Fornecedor fornecedor) {
         txtRazaoSocial.setText(fornecedor.getRazaoSocial());
         txtNomeFantasia.setText(fornecedor.getNomefantasia());
         txtCnpj.setText(fornecedor.getCnpj());
         txtTelefone.setText(fornecedor.getTelefone());
         txtEmail.setText(fornecedor.getEmail());
     }
+
     /*
     private void preencherCampos(Curso curso){
         
@@ -54,7 +56,7 @@ public class FornecedorEditar extends javax.swing.JDialog {
         txtNomeCurso.setText(curso.getNome());
         cboxAtivo.setSelected(curso.isAtivo());
     }
-    */
+     */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -231,30 +233,30 @@ public class FornecedorEditar extends javax.swing.JDialog {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
-        
+
         String razaoSocial = txtRazaoSocial.getText();
         String nomeFantasia = txtNomeFantasia.getText();
         String cnpj = txtCnpj.getText();
         String telefone = txtTelefone.getText();
         String email = txtEmail.getText();
 
-        if (razaoSocial.isBlank() || cnpj.isBlank()){
+        if (razaoSocial.isBlank() || cnpj.isBlank()) {
             JOptionPane.showMessageDialog(this, "Campos obrigatórios não preenchidos", "Cadastro Incompleto", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        try{
+
+        try {
             this.fornecedorEdicao.setRazaoSocial(razaoSocial);
             this.fornecedorEdicao.setNomefantasia(nomeFantasia);
             this.fornecedorEdicao.setCnpj(cnpj);
             this.fornecedorEdicao.setTelefone(telefone);
             this.fornecedorEdicao.setEmail(email);
-            
+
             fornecedorController.update(this.fornecedorEdicao);
             JOptionPane.showMessageDialog(this, "Fornecedor Atualizado com Sucesso");
             this.dispose();
-            
-        } catch (RuntimeException e){
+
+        } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_bntSalvarActionPerformed

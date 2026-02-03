@@ -23,6 +23,11 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
+import org.springframework.beans.factory.annotation.Autowired; // Import Autowired
+import org.springframework.context.annotation.Lazy; // Import Lazy
+import br.com.ifba.usuario.entity.Usuario;
+import javax.swing.JOptionPane;
+import br.com.ifba.usuario.view.UsuarioListar; // Novo Import
 
 /**
  *
@@ -33,6 +38,8 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaInicial.class.getName());
 
+    private br.com.ifba.usuario.entity.Usuario usuarioLogado;
+
     private final UsuarioRegistrar usuarioRegistrarTela;
 
     private final FuncionariosListar funcionariosListar;
@@ -40,8 +47,12 @@ public class TelaInicial extends javax.swing.JFrame {
     private final ProdutoListar produtoListar;
 
     private final ClienteListar clienteListar;
+    
+    private final UsuarioListar usuarioListar;
 
-    private final UsuarioLogin usuarioLogin;
+    @Autowired
+    @Lazy
+    private UsuarioLogin usuarioLogin;
 
     private final CompraListar compraListar;
 
@@ -66,22 +77,36 @@ public class TelaInicial extends javax.swing.JFrame {
      * @param vendaListar
      * @param fornecedorListar
      */
-    public TelaInicial(CompraListar compraListar, UsuarioRegistrar usuarioRegistrarTela, UsuarioLogin usuarioLogin, FuncionariosListar funcionariosListar, ProdutoListar produtoListar, ClienteListar clienteListar, MedicamentoListar medicamentoListar, VendaListar vendaListar, FornecedorListar fornecedorListar, ConvenioListar convenioListar) {
+    public TelaInicial(CompraListar compraListar, UsuarioRegistrar usuarioRegistrarTela, UsuarioLogin usuarioLogin, FuncionariosListar funcionariosListar, ProdutoListar produtoListar, ClienteListar clienteListar, MedicamentoListar medicamentoListar, VendaListar vendaListar, FornecedorListar fornecedorListar, ConvenioListar convenioListar, UsuarioListar usuarioListar) {
         this.usuarioRegistrarTela = usuarioRegistrarTela;
         this.funcionariosListar = funcionariosListar;
         this.produtoListar = produtoListar;
         this.clienteListar = clienteListar;
-        this.usuarioLogin = usuarioLogin;
         this.compraListar = compraListar;
         this.medicamentoListar = medicamentoListar;
         this.vendaListar = vendaListar;
         this.fornecedorListar = fornecedorListar;
         this.convenioListar = convenioListar;
+        this.usuarioListar = usuarioListar;
+
         initComponents();
         iniciarRelogio();
         iniciarConsoleLog();
 
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+    }
+
+    public void definirUsuario(br.com.ifba.usuario.entity.Usuario usuario) {
+        this.usuarioLogado = usuario;
+
+        if (usuario != null && usuario.getNome() != null) {
+            String nomeOriginal = usuario.getNome();
+
+            // Pega a primeira letra, transforma em maiúscula, e junta com o resto minúsculo
+            String nomeFormatado = nomeOriginal.substring(0, 1).toUpperCase() + nomeOriginal.substring(1).toLowerCase();
+
+            jLabel2.setText("Olá, bem-vindo a FARMADS " + nomeFormatado);
+        }
     }
 
     /**
@@ -111,6 +136,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtConsole = new javax.swing.JTextArea();
+        btnSair = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -125,7 +151,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton2.setText("Registrar usuarios");
+        jToggleButton2.setText("Usuarios");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
@@ -227,6 +253,13 @@ public class TelaInicial extends javax.swing.JFrame {
         txtConsole.setRows(5);
         jScrollPane1.setViewportView(txtConsole);
 
+        btnSair.setText("Logoff");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -242,6 +275,7 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,7 +328,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblRelogio)
@@ -309,7 +345,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        this.usuarioRegistrarTela.setVisible(true);
+        this.usuarioListar.setVisible(true);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
@@ -322,7 +358,19 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFuncionariosActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        this.usuarioLogin.setVisible(true);
+        // Verifica se a variável usuarioLogado não está vazia
+        if (this.usuarioLogado != null) {
+
+            // Mostra o aviso com o nome do usuário
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Você já está logado no sistema como " + this.usuarioLogado.getNome() + "!",
+                    "Aviso",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            // Se por algum erro estiver nulo, abre a tela de login (segurança)
+            this.usuarioLogin.setVisible(true);
+        }
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
@@ -392,6 +440,22 @@ public class TelaInicial extends javax.swing.JFrame {
         this.convenioListar.setVisible(true);
     }//GEN-LAST:event_btnConveniosActionPerformed
 
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // LOGOFF DO SISTEMA
+        int confirma = JOptionPane.showConfirmDialog(this, "Deseja realmente fazer logoff?", "Sair do Sistema", JOptionPane.YES_NO_OPTION);
+
+        if (confirma == JOptionPane.YES_OPTION) {
+            // Fecha a tela principal
+            this.setVisible(false);
+
+            // Abre a tela de login
+            usuarioLogin.setVisible(true);
+
+            // Opcional: Limpar o usuário logado da memória
+            this.usuarioLogado = null;
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_btnSairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -422,6 +486,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnConvenios;
     private javax.swing.JButton btnFuncionarios;
+    private javax.swing.JToggleButton btnSair;
     private javax.swing.JButton btnVendas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

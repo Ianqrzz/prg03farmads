@@ -40,6 +40,7 @@ public class FornecedorListar extends javax.swing.JDialog {
      */
     public FornecedorListar() {
         initComponents();
+        this.setLocationRelativeTo(null);
         bntEditar.setEnabled(false);
         bntDeletar.setEnabled(false);
         setLocationRelativeTo(null);

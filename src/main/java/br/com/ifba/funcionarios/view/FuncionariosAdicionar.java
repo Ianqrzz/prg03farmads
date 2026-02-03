@@ -24,6 +24,7 @@ public class FuncionariosAdicionar extends javax.swing.JDialog {
         this.controller = controller;
         initComponents();
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
 

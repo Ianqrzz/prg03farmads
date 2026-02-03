@@ -44,6 +44,7 @@ public class VendaEditar extends javax.swing.JFrame {
     initComponents();
     preencherCampos();
     carregarDadosIniciais(); 
+    this.setLocationRelativeTo(null);
 }
     
 
@@ -302,7 +303,7 @@ public class VendaEditar extends javax.swing.JFrame {
                                         .addComponent(lblData))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(35, 35, 35)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblIdVenda)
                                             .addComponent(lblVendaa, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

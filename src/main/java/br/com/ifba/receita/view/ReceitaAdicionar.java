@@ -19,6 +19,7 @@ public class ReceitaAdicionar extends javax.swing.JDialog {
     public ReceitaAdicionar() {
         
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

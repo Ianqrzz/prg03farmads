@@ -26,6 +26,7 @@ public class AdicionarClientes extends javax.swing.JFrame {
     public AdicionarClientes(java.awt.Frame parent, boolean modal, ClienteIController controller) {
         this.controller = (ClienteController) controller;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     private AdicionarClientes() {

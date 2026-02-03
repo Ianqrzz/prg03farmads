@@ -41,6 +41,7 @@ public class VendaAdicionar extends javax.swing.JFrame {
         this.produtoController = produtoController;
         initComponents();
         carregarDadosIniciais();
+        this.setLocationRelativeTo(null);
     }
 
     private void carregarDadosIniciais() {

@@ -8,6 +8,8 @@ import br.com.ifba.usuario.entity.Usuario;
 import javax.swing.JOptionPane;
 import org.springframework.stereotype.Component;
 import br.com.ifba.usuario.controller.UsuarioIController;
+import org.springframework.beans.factory.annotation.Autowired; // Import Autowired
+import org.springframework.context.annotation.Lazy; // Import Lazy
 
 /**
  *
@@ -15,13 +17,18 @@ import br.com.ifba.usuario.controller.UsuarioIController;
  */
 @Component
 public class UsuarioRegistrar extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UsuarioRegistrar.class.getName());
-    
+
     private final UsuarioIController controller;
+
+    @Autowired
+    @Lazy
+    private UsuarioLogin usuarioLogin;
 
     /**
      * Creates new form UsuarioRegistrar
+     *
      * @param controller
      */
     public UsuarioRegistrar(UsuarioIController controller) {
@@ -41,10 +48,10 @@ public class UsuarioRegistrar extends javax.swing.JFrame {
 
         txtLogin = new javax.swing.JTextField();
         txtSenha = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         BtnRegistrar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,11 +61,9 @@ public class UsuarioRegistrar extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Registro de Usuario");
+        jLabel2.setText("Insira seu nome");
 
-        jLabel2.setText("Login:");
-
-        jLabel3.setText("Senha:");
+        jLabel3.setText("Insira sua senha");
 
         BtnRegistrar.setText("Registrar");
         BtnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +71,9 @@ public class UsuarioRegistrar extends javax.swing.JFrame {
                 BtnRegistrarActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setText("Sistema Farmds");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,34 +83,36 @@ public class UsuarioRegistrar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtLogin, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
                         .addComponent(BtnRegistrar)))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(BtnRegistrar)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,15 +125,25 @@ public class UsuarioRegistrar extends javax.swing.JFrame {
     private void BtnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarActionPerformed
 
         try {
-            Usuario user = new Usuario();  
-            
+            Usuario user = new Usuario();
+
             user.setLogin(txtLogin.getText());
-            
+            user.setNome(txtLogin.getText()); // Usando Login como Nome temporariamente (se tiver campo nome, ajuste)
             user.setSenha(txtSenha.getText());
-            
+
             this.controller.save(user);
-            JOptionPane.showMessageDialog(this,"Usuario Cadastrado!");
-        } catch(Exception e) {
+
+            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+
+            // REDIRECIONA PARA LOGIN
+            usuarioLogin.setVisible(true);
+            this.setVisible(false);
+
+            // Limpa campos
+            txtLogin.setText("");
+            txtSenha.setText("");
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar: " + e.getMessage());
         }
     }//GEN-LAST:event_BtnRegistrarActionPerformed

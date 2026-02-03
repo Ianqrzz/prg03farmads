@@ -23,6 +23,7 @@ public class ClienteEditar extends javax.swing.JFrame {
 
         initComponents();
         preencherCampos();
+        this.setLocationRelativeTo(null);
     }
 
     private void preencherCampos() {

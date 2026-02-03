@@ -18,6 +18,7 @@ public class ReceitaVisualizar extends javax.swing.JFrame {
      */
     public ReceitaVisualizar() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

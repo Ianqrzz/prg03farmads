@@ -29,6 +29,7 @@ public class FornecedorAdicionar extends javax.swing.JDialog {
         
         initComponents();
         this.setModal(true);
+        this.setLocationRelativeTo(null);
     }
 
     /**

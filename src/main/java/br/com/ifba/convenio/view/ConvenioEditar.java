@@ -13,23 +13,23 @@ import javax.swing.JOptionPane;
  * @author ianep
  */
 public class ConvenioEditar extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ConvenioEditar.class.getName());
 
     private Convenio convenio;
-private ConvenioIController controller;
+    private ConvenioIController controller;
 
 // Construtor completo
-public ConvenioEditar(java.awt.Frame parent, boolean modal, Convenio convenio, ConvenioIController controller) {
-    super(parent, modal);
-    initComponents();
+    public ConvenioEditar(java.awt.Frame parent, boolean modal, Convenio convenio, ConvenioIController controller) {
+        super(parent, modal);
+        initComponents();
 
-    this.convenio = convenio;
-    this.controller = controller;
+        this.convenio = convenio;
+        this.controller = controller;
 
-    preencherCampos(); // Carrega os dados nos campos
-    this.setLocationRelativeTo(null);
-}
+        preencherCampos(); // Carrega os dados nos campos
+        this.setLocationRelativeTo(null);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -110,19 +110,19 @@ public ConvenioEditar(java.awt.Frame parent, boolean modal, Convenio convenio, C
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-    convenio.setNome(txtNomeEdit.getText());
+            convenio.setNome(txtNomeEdit.getText());
 
-    String valor = txtDescontoEdit.getText().replace(",", ".");
-    convenio.setDesconto(new java.math.BigDecimal(valor));
+            String valor = txtDescontoEdit.getText().replace(",", ".");
+            convenio.setDesconto(new java.math.BigDecimal(valor));
 
-    this.controller.update(convenio); // Manda atualizar
+            this.controller.update(convenio); // Manda atualizar
 
-    JOptionPane.showMessageDialog(this, "Atualizado!");
-    this.dispose();
+            JOptionPane.showMessageDialog(this, "Atualizado!");
+            this.dispose();
 
-            } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-            }   
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtDescontoEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescontoEditActionPerformed
@@ -134,12 +134,12 @@ public ConvenioEditar(java.awt.Frame parent, boolean modal, Convenio convenio, C
      */
     public static void main(String args[]) {
     }
-    
+
     private void preencherCampos() {
-    txtNomeEdit.setText(convenio.getNome());
-    txtDescontoEdit.setText(String.valueOf(convenio.getDesconto()));
-}
-    
+        txtNomeEdit.setText(convenio.getNome());
+        txtDescontoEdit.setText(String.valueOf(convenio.getDesconto()));
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnSalvar;

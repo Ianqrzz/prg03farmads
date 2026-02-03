@@ -1,6 +1,6 @@
 package br.com.ifba;
 
-import br.com.ifba.view.TelaInicial;
+import br.com.ifba.usuario.view.UsuarioLogin; 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,8 +15,8 @@ public class Prg03farmadsApplication {
                         .headless(false)
                         .run(args);
 
-        TelaInicial telaPrincipal = context.getBean(TelaInicial.class);
-
-        telaPrincipal.setVisible(true);
+        // MUDANÇA AQUI: Chama a tela de Login primeiro
+        UsuarioLogin usuarioLogin = context.getBean(UsuarioLogin.class);
+        usuarioLogin.setVisible(true);
     }
 }

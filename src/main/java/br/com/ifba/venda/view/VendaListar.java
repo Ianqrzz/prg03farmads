@@ -18,23 +18,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VendaListar extends javax.swing.JFrame {
-    
+
     @Autowired
     private VendaIController vendaController;
-    
+
     @Autowired
     private FuncionariosController funcionarioController;
-    
+
     @Autowired
     private ClienteIController clienteController;
-    
+
     @Autowired
-    private IProdutoController produtoController; 
+    private IProdutoController produtoController;
 
     private List<Venda> listaVendas;
 
     public VendaListar() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     @PostConstruct
@@ -50,7 +51,7 @@ public class VendaListar extends javax.swing.JFrame {
 
         if (listaVendas != null) {
             for (Venda venda : listaVendas) {
-    
+
                 model.addRow(new Object[]{
                     venda.getId(),
                     venda.getDataVenda().toString(),
@@ -63,7 +64,6 @@ public class VendaListar extends javax.swing.JFrame {
         }
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -195,75 +195,69 @@ public class VendaListar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-           
+
         VendaAdicionar telaAdd = new VendaAdicionar(vendaController, funcionarioController, clienteController, produtoController);
-    
 
         telaAdd.setVisible(true);
-    
-   
+
         preencherTabela();
-        
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int linhaSelecionada = tblVendas.getSelectedRow();
 
-    if (linhaSelecionada == -1) {
-        JOptionPane.showMessageDialog(this, "Selecione uma venda para excluir!");
-        return;
-    }
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione uma venda para excluir!");
+            return;
+        }
 
-    Venda vendaSelecionada = listaVendas.get(linhaSelecionada);
+        Venda vendaSelecionada = listaVendas.get(linhaSelecionada);
 
-    int confirmacao = JOptionPane.showConfirmDialog(
-        this,
-        "Deseja realmente excluir a venda ID: " + vendaSelecionada.getId() + "?",
-        "Confirmar Exclusão",
-        JOptionPane.YES_NO_OPTION
-    );
+        int confirmacao = JOptionPane.showConfirmDialog(
+                this,
+                "Deseja realmente excluir a venda ID: " + vendaSelecionada.getId() + "?",
+                "Confirmar Exclusão",
+                JOptionPane.YES_NO_OPTION
+        );
 
-    if (confirmacao == JOptionPane.YES_OPTION) {
-        vendaController.deleteById(vendaSelecionada.getId());
-        preencherTabela();
-        JOptionPane.showMessageDialog(this, "Venda excluída com sucesso!");
-    }
-    
-        
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            vendaController.deleteById(vendaSelecionada.getId());
+            preencherTabela();
+            JOptionPane.showMessageDialog(this, "Venda excluída com sucesso!");
+        }
+
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
+        int linhaSelecionada = tblVendas.getSelectedRow();
 
-    int linhaSelecionada = tblVendas.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Selecione uma VENDA para editar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
 
-    if (linhaSelecionada == -1) {
-        JOptionPane.showMessageDialog(
-            this,
-            "Selecione uma VENDA para editar!",
-            "Atenção",
-            JOptionPane.WARNING_MESSAGE
+        Venda vendaSelecionada = listaVendas.get(linhaSelecionada);
+
+        VendaEditar telaEditar = new VendaEditar(
+                vendaSelecionada,
+                vendaController,
+                funcionarioController,
+                clienteController,
+                produtoController
         );
-        return;
-    }
 
-   
-    Venda vendaSelecionada = listaVendas.get(linhaSelecionada);
+        telaEditar.setVisible(true);
 
+        preencherTabela();
 
-    VendaEditar telaEditar = new VendaEditar(
-        vendaSelecionada, 
-        vendaController, 
-        funcionarioController, 
-        clienteController, 
-        produtoController
-    );
-
-    telaEditar.setVisible(true);
-
-
-    preencherTabela();
-        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnResetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetarActionPerformed
@@ -273,33 +267,32 @@ public class VendaListar extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         String nomePesquisado = txtPesquisa.getText().trim().toLowerCase();
-    DefaultTableModel model = (DefaultTableModel) tblVendas.getModel();
-    model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tblVendas.getModel();
+        model.setRowCount(0);
 
-    if (nomePesquisado.isEmpty()) {
-        preencherTabela();
-        return;
-    }
-
-    for (Venda venda : listaVendas) {
-        // Pesquisa pelo nome do cliente vinculado à venda
-        if (venda.getCliente().getNome().toLowerCase().contains(nomePesquisado)) {
-            model.addRow(new Object[]{
-                venda.getId(),
-                venda.getDataVenda().toString(),
-                venda.getValorTotal(),
-                venda.getFuncionario().getNome(),
-                venda.getCliente().getNome()
-            });
+        if (nomePesquisado.isEmpty()) {
+            preencherTabela();
+            return;
         }
-    }
-    
+
+        for (Venda venda : listaVendas) {
+            // Pesquisa pelo nome do cliente vinculado à venda
+            if (venda.getCliente().getNome().toLowerCase().contains(nomePesquisado)) {
+                model.addRow(new Object[]{
+                    venda.getId(),
+                    venda.getDataVenda().toString(),
+                    venda.getValorTotal(),
+                    venda.getFuncionario().getNome(),
+                    venda.getCliente().getNome()
+                });
+            }
+        }
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
